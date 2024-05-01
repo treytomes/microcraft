@@ -53,3 +53,5 @@ Font.renderFrame = function(screen, title, x0, y0, x1, y1)
 
     self.draw(title, screen, x0 * 8 + 8, y0 * 8, Color.get(5, 5, 5, 550))
 end function
+
+return Font
