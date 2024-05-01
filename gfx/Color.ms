@@ -11,3 +11,5 @@ Color.get = function(a, b=null, c=null, d=null)
 		return (self.get(d) * 2^24) + (self.get(c) * 2^16) + (self.get(b) * 2^8) + (self.get(a))
     end if
 end function
+
+return Color
