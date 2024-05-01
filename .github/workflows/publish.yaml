@@ -1,0 +1,31 @@
+# Choose the name you want
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+  # Leave if you want to trigger builds manually
+  workflow_dispatch:
+
+jobs:
+
+  publish:
+    uses: treytomes/microcraft/.github/workflows/itch-deploy.yaml@main
+    with:
+      minidisk_main_file: init.ms
+      minidisk_additional_entries: >-
+        assets
+        lib
+        scripts
+        src
+        cleanup.ms
+        LICENSE
+        main.ms
+      boot_opts_path: bootOpts.grfon
+      custom_executable_name: microcraft.exe
+      itch_io_username: treytomes
+      itch_io_game_id: microcraft
+      itchio_web_channel: html5
+    secrets:
+      itch_io_api_key: ${{ secrets.ITCH_IO_API_KEY }}
