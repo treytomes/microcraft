@@ -70,7 +70,7 @@ Screen.overlay = function(screen2, xa, ya)
     i = 0
     for y in range(0, self.h - 1)
         for x in range(0, self.w - 1)
-            if floor(oPixels[i] / 10) <= self.dither[((x + xa) & 3) + ((y + ya) & 3) * 4] then self.pixels[i] = 0
+            if floor(oPixels[i] / 10) <= self.dither[bitAnd((x + xa), 3) + bitAnd((y + ya), 3) * 4] then self.pixels[i] = 0
             i += 1
         end for
     end for

@@ -24,5 +24,8 @@ env.addImportPath "./sound"
 
 globals.Color = require("Color")
 globals.Font = require("Font")
+globals.Screen = require("Screen")
+globals.Sprite = require("Sprite")
+globals.SpriteSheet = require("SpriteSheet")
 
 print "micro-hack!"
