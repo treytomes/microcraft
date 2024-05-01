@@ -22,10 +22,14 @@ env.addImportPath "./level/tile"
 env.addImportPath "./screen"
 env.addImportPath "./sound"
 
+// gfx
 globals.Color = require("Color")
 globals.Font = require("Font")
 globals.Screen = require("Screen")
 globals.Sprite = require("Sprite")
 globals.SpriteSheet = require("SpriteSheet")
+
+// sound
+globals.Sounds = require("Sounds") // Had to rename this one to avoid naming conflicts.
 
 print "micro-hack!"
