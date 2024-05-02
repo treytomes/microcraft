@@ -1,6 +1,7 @@
 import "importUtil"
 ensureImport "events"
 ensureImport "listUtil"
+ensureImport "qa"
 
 ensureImport "coreUtil"
 
@@ -32,6 +33,12 @@ globals.FurnitureRecipe = require("FurnitureRecipe")
 globals.ResourceRecipe = require("Recipe")
 globals.ToolRecipe = require("ToolRecipe")
 globals.Crafting = require("Crafting")
+
+// item/source
+// TODO: I'm expecting a circular dependency here.  Might need a factory initializer for recipes and resouces.
+globals.Resource = require("Resource")
+globals.FoodResource = require("FoodResource")
+globals.PlantableResource = require("PlantableResource")
 
 // gfx
 globals.Color = require("Color")
