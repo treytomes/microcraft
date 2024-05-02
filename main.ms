@@ -15,6 +15,7 @@ end function
 
 env.addImportPath "./crafting"
 env.addImportPath "./entity"
+env.addImportPath "./entity/particle"
 env.addImportPath "./gfx"
 env.addImportPath "./item"
 env.addImportPath "./item/resource"
@@ -23,6 +24,8 @@ env.addImportPath "./level/levelgen"
 env.addImportPath "./level/tile"
 env.addImportPath "./screen"
 env.addImportPath "./sound"
+
+globals.Random = require("Random")
 
 // screen
 globals.ListItem = require("ListItem")
@@ -33,6 +36,11 @@ globals.FurnitureRecipe = require("FurnitureRecipe")
 globals.ResourceRecipe = require("Recipe")
 globals.ToolRecipe = require("ToolRecipe")
 globals.Crafting = require("Crafting")
+
+// entity/particle
+globals.Particle = require("Particle")
+globals.SmashParticle = require("SmashParticle")
+globals.TextParticle = require("TextParticle")
 
 // item
 globals.Item = require("Item")

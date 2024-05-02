@@ -68,10 +68,10 @@ end function
 // @returns {int}
 ToolItem.getAttackDamageBonus = function(e)
     if self.type == ToolType.axe then
-        return (self.level + 1) * 2 + floor(rnd * 4)
+        return (self.level + 1) * 2 + floor(Random.nextFloat * 4)
     end if
     if self.type == ToolType.sword then 
-        return (self.level + 1) * 3 + floor(rnd * (2 + self.level * self.level * 2));
+        return (self.level + 1) * 3 + floor(Random.nextFloat * (2 + self.level * self.level * 2));
     end if
     return 1
 end function
