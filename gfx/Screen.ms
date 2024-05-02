@@ -16,6 +16,8 @@ Screen.init = function(w, h, sheet)
     self.h = h
 
     self.pixels = [0] * w * h
+
+    return self
 end function
 
 // @param {int} color

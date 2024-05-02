@@ -13,6 +13,8 @@ SpriteSheet.init = function(image)
             pixels.push floor(bitAnd(c, 255) / 64) // Convert to range [0-3].
         end for
     end for
+
+    return self
 end function
 
 return SpriteSheet
