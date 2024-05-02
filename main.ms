@@ -34,6 +34,14 @@ globals.ResourceRecipe = require("Recipe")
 globals.ToolRecipe = require("ToolRecipe")
 globals.Crafting = require("Crafting")
 
+// item
+globals.Item = require("Item")
+globals.FurnitureItem = require("FurnitureItem")
+globals.PowerGloveItem = require("PowerGloveItem")
+globals.ResourceItem = require("ResourceItem")
+globals.ToolItem = require("ToolItem")
+globals.ToolType = require("ToolType")
+
 // item/source
 // TODO: I'm expecting a circular dependency here.  Might need a factory initializer for recipes and resouces.
 globals.Resource = require("Resource")
