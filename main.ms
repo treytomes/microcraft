@@ -23,6 +23,16 @@ env.addImportPath "./level/tile"
 env.addImportPath "./screen"
 env.addImportPath "./sound"
 
+// screen
+globals.ListItem = require("ListItem")
+
+// crafting
+globals.Recipe = require("Recipe")
+globals.FurnitureRecipe = require("FurnitureRecipe")
+globals.ResourceRecipe = require("Recipe")
+globals.ToolRecipe = require("ToolRecipe")
+globals.Crafting = require("Crafting")
+
 // gfx
 globals.Color = require("Color")
 globals.Font = require("Font")
