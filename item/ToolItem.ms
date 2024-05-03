@@ -19,7 +19,7 @@ ToolItem.LEVEL_COLORS = [
 // @param {ToolType} type
 // @param {int} level
 // @returns {ToolItem}
-ToolItem.init = function(type, level)
+ToolItem.make = function(type, level)
     self.type = type
     self.level = level
     return self
@@ -56,7 +56,7 @@ ToolItem.getName = function()
 end function
 
 // @param {ItemEntity} itemEntity
-ToolItem.onTake = function(ItemEntity itemEntity)
+ToolItem.onTake = function(itemEntity)
 end function
 
 // @returns {boolean}

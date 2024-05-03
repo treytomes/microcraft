@@ -1,6 +1,6 @@
 Particle = new Entity
 
-Particle.init = function
+Particle.make = function
 end function
 
 Particle.tick = function

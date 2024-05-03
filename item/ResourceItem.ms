@@ -3,7 +3,7 @@ ResourceItem._class = "ResourceItem"
 
 // @param {Resource} resource
 // @returns {ResourceItem}
-ResourceItem.init = function(resource, count = 1)
+ResourceItem.make = function(resource, count = 1)
     self.resource = resource
     self.count = count
     return self
@@ -53,7 +53,7 @@ end function
 // @param {Player} player
 // @param {int} attackDir
 // @returns {boolean}
-ResourceItem.interactOn(tile, level, xt, yt, player, attackDir)
+ResourceItem.interactOn = function(tile, level, xt, yt, player, attackDir)
     if self.resource.interactOn(tile, level, xt, yt, player, attackDir) then
         count -= 1
         return true

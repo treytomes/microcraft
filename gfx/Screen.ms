@@ -8,7 +8,7 @@ Screen.dither = [ 0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5 ]
 // @param {int} w
 // @param {int} h
 // @param {SpriteSheet} sheet
-Screen.init = function(w, h, sheet)
+Screen.make = function(w, h, sheet)
     self.xOffset = 0
     self.yOffset = 0
     self.sheet = sheet

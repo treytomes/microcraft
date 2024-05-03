@@ -3,7 +3,7 @@ FurnitureItem._class = "FurnitureItem"
 
 // @param {Furniture} furniture
 // @returns {FurnitureItem}
-FurnitureItem.init = function(furniture)
+FurnitureItem.make = function(furniture)
     self.furniture = furniture
     self.placed = false
     return self
@@ -54,7 +54,7 @@ FurnitureItem.interactOn = function(tile, level, xt, yt, player, attackDir)
     if tile.mayPass(level, xt, yt, self.furniture) then
         self.furniture.x = xt * 16 + 8
         self.furniture.y = yt * 16 + 8
-        level.add(self.furniture)
+        level.push(self.furniture)
         self.placed = true
         return true
     end if

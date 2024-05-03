@@ -4,7 +4,7 @@ SmashParticle = new Entity
 // @param {int} x
 // @param {int} y
 // @returns {SmashParticle}
-SmashParticle.init = function(x, y)
+SmashParticle.make = function(x, y)
     self.time = 0
     self.x = x
     self.y = y

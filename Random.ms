@@ -6,6 +6,10 @@ Random.nextFloat = function
     return rnd
 end function
 
+Random.nextInt = function(limit)
+    return floor(self.nextFloat * limit)
+end function
+
 Random.nextGaussian = function
     if self.haveNextNextGaussian then
         self.haveNextNextGaussian = false

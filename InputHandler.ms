@@ -1,6 +1,6 @@
 Key = {}
 
-Key.init = function()
+Key.make = function()
     self.presses = 0
     self.absorbs = 0
     self.down = false
@@ -25,13 +25,13 @@ end function
 
 InputHandler = {}
 
-InputHandler.init = function()
-    self.up = (new Key).init
-    self.down = (new Key).init
-    self.left = (new Key).init
-    self.right = (new Key).init
-    self.attack = (new Key).init
-    self.menu = (new Key).init
+InputHandler.make = function()
+    self.up = (new Key).make
+    self.down = (new Key).make
+    self.left = (new Key).make
+    self.right = (new Key).make
+    self.attack = (new Key).make
+    self.menu = (new Key).make
 
     self.keys = [ self.up, self.down, self.left, self.right, self.attack, self.menu ]
 

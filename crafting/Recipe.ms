@@ -2,7 +2,7 @@ Recipe = new ListItem
 
 // @param {Item} resultTemplate
 // @returns {Recipe}
-Recipe.init = function(resultTemplate)
+Recipe.make = function(resultTemplate)
     // @type {Item[]}
     self.costs = []
     self.canCraft = false
@@ -14,7 +14,7 @@ end function
 // @param {int} count
 // @returns {Recipe}
 Recipe.addCost = function(resource, count)
-    self.costs.push (new ResourceItem).init(resource, count)
+    self.costs.push (new ResourceItem).make(resource, count)
     return self
 end function
 

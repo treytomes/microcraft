@@ -1,7 +1,7 @@
 SpriteSheet = {}
 
 // {Image} image
-SpriteSheet.init = function(image)
+SpriteSheet.make = function(image)
     self.width = image.width
     self.height = image.height
     

@@ -6,8 +6,8 @@ FoodResource = new Resource
 // @param {int} heal
 // @param {int} staminaCost
 // @return {FoodResouce}
-FoodResource.init = function(name, sprite, color, heal, staminaCost)
-    super.init(name, sprite, color)
+FoodResource.make = function(name, sprite, color, heal, staminaCost)
+    super.make(name, sprite, color)
     self.heal = heal
     self.staminaCost = staminaCost
     return self

@@ -45,7 +45,7 @@ public class FurnitureItem extends Item {
 		if (tile.mayPass(level, xt, yt, furniture)) {
 			furniture.x = xt * 16 + 8;
 			furniture.y = yt * 16 + 8;
-			level.add(furniture);
+			level.push(furniture);
 			placed = true;
 			return true;
 		}

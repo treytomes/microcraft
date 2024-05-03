@@ -5,7 +5,7 @@ Sprite = {}
 // {int} img
 // {int} col
 // {int} bits
-Sprite.init = function(x, y, img, col, bits)
+Sprite.make = function(x, y, img, col, bits)
     self.x = x
     self.y = y
     self.img = img

@@ -27,8 +27,48 @@ env.addImportPath "./sound"
 
 globals.Random = require("Random")
 
+// gfx
+globals.Color = require("Color")
+globals.Font = require("Font")
+globals.Screen = require("Screen")
+globals.Sprite = require("Sprite")
+globals.SpriteSheet = require("SpriteSheet")
+
 // screen
 globals.ListItem = require("ListItem")
+
+// entity
+globals.Entity = require("Entity")
+globals.Furniture = require("Furniture")
+globals.Inventory = require("Inventory")
+globals.ItemEntity = require("ItemEntity")
+globals.Mob = require("Mob")
+globals.AirWizard = require("AirWizard")
+globals.Anvil = require("Anvil")
+globals.Chest = require("Chest")
+globals.Furnace = require("Furnace")
+globals.Lantern = require("Lantern")
+globals.Oven = require("Oven")
+globals.Player = require("Player")
+globals.Slime = require("Slime")
+globals.Spark = require("Spark")
+globals.Workbench = require("Workbench")
+globals.Zombie = require("Zombie")
+
+// item
+globals.ToolType = require("ToolType")
+globals.Item = require("Item")
+globals.FurnitureItem = require("FurnitureItem")
+globals.PowerGloveItem = require("PowerGloveItem")
+globals.ResourceItem = require("ResourceItem")
+globals.ToolItem = require("ToolItem")
+
+// item/source
+// TODO: I'm expecting a circular dependency here.  Might need a factory initializer for recipes and resouces.
+globals.Resource = require("Resource")
+globals.FoodResource = require("FoodResource")
+globals.PlantableResource = require("PlantableResource")
+ensureImport("resources")
 
 // crafting
 globals.Recipe = require("Recipe")
@@ -42,27 +82,6 @@ globals.Particle = require("Particle")
 globals.SmashParticle = require("SmashParticle")
 globals.TextParticle = require("TextParticle")
 
-// item
-globals.Item = require("Item")
-globals.FurnitureItem = require("FurnitureItem")
-globals.PowerGloveItem = require("PowerGloveItem")
-globals.ResourceItem = require("ResourceItem")
-globals.ToolItem = require("ToolItem")
-globals.ToolType = require("ToolType")
-
-// item/source
-// TODO: I'm expecting a circular dependency here.  Might need a factory initializer for recipes and resouces.
-globals.Resource = require("Resource")
-globals.FoodResource = require("FoodResource")
-globals.PlantableResource = require("PlantableResource")
-
-// gfx
-globals.Color = require("Color")
-globals.Font = require("Font")
-globals.Screen = require("Screen")
-globals.Sprite = require("Sprite")
-globals.SpriteSheet = require("SpriteSheet")
-
 // sound
 globals.Sounds = require("Sounds") // Had to rename this one to avoid naming conflicts.
 
@@ -70,8 +89,7 @@ globals.InputHandler = require("InputHandler")
 
 print "micro-hack!"
 
-
-input = (new InputHandler).init
+input = (new InputHandler).make
 
 events.eventLoop.onKeyDown["[8]"] = function; input.up.toggle(true); end function
 events.eventLoop.onKeyDown["[2]"] = function; input.down.toggle(true); end function
