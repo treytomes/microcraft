@@ -37,6 +37,8 @@ globals.SpriteSheet = require("SpriteSheet")
 // screen
 globals.ListItem = require("ListItem")
 
+globals.LevelGen = require("LevelGen")
+
 // entity
 globals.Entity = require("Entity")
 globals.Furniture = require("Furniture")
