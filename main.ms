@@ -65,12 +65,36 @@ globals.PowerGloveItem = require("PowerGloveItem")
 globals.ResourceItem = require("ResourceItem")
 globals.ToolItem = require("ToolItem")
 
+// level/tile
+globals.Tile = require("Tile")
+globals.CactusTile = require("CactusTile")
+globals.CloudCactusTile = require("CloudCactusTile")
+globals.CloudTile = require("CloudTile")
+globals.DirtTile = require("DirtTile")
+globals.FarmTile = require("FarmTile")
+globals.GrassTile = require("GrassTile")
+globals.FlowerTile = require("FlowerTile")
+globals.HardRockTile = require("HardRockTile")
+globals.HoleTile = require("HoleTile")
+globals.InfiniteFallTile = require("InfiniteFallTile")
+globals.LavaTile = require("LavaTile")
+globals.OreTile = require("OreTile")
+globals.RockTile = require("RockTile")
+globals.SandTile = require("SandTile")
+globals.SaplingTile = require("SaplingTile")
+globals.StairsTile = require("StairsTile")
+globals.StoneTile = require("StoneTile")
+globals.TreeTile = require("TreeTile")
+globals.WaterTile = require("WaterTile")
+globals.WheatTile = require("WheatTile")
+
 // item/source
 // TODO: I'm expecting a circular dependency here.  Might need a factory initializer for recipes and resouces.
 globals.Resource = require("Resource")
 globals.FoodResource = require("FoodResource")
 globals.PlantableResource = require("PlantableResource")
-ensureImport("resources")
+
+ensureImport("items")
 
 // crafting
 globals.Recipe = require("Recipe")

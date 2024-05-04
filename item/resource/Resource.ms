@@ -9,6 +9,7 @@ Resource.make = function(name, sprite, color)
     self.name = name
     self.sprite = sprite
     self.color = color
+    return self
 end function
 
 // @param {Tile} tile

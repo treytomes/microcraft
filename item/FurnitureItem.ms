@@ -54,7 +54,7 @@ FurnitureItem.interactOn = function(tile, level, xt, yt, player, attackDir)
     if tile.mayPass(level, xt, yt, self.furniture) then
         self.furniture.x = xt * 16 + 8
         self.furniture.y = yt * 16 + 8
-        level.push(self.furniture)
+        level.add(self.furniture)
         self.placed = true
         return true
     end if

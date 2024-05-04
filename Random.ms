@@ -10,6 +10,11 @@ Random.nextInt = function(limit)
     return floor(self.nextFloat * limit)
 end function
 
+Random.nextBoolean = function
+    if self.nextFloat >= 0.5 then return true
+    return false
+end function
+
 Random.nextGaussian = function
     if self.haveNextNextGaussian then
         self.haveNextNextGaussian = false

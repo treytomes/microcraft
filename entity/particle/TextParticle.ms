@@ -6,7 +6,7 @@ TextParticle = new Entity
 // @param {int} y
 // @param {int} col
 // @returns {TextParticle}
-TextParticle = function(msg, x, y, col)
+TextParticle.make = function(msg, x, y, col)
     self.time = 0
     self.msg = msg
     self.x = x

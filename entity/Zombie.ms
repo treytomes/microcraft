@@ -88,7 +88,7 @@ Zombie.die = function()
 
     count = Random.nextInt(2) + 1
     for i in range(0, count - 1)
-        self.level.push((new ItemEntity).make((new ResourceItem).make(Resource.cloth), self.x + Random.nextInt(11) - 5, self.y + Random.nextInt(11) - 5))
+        self.level.add((new ItemEntity).make((new ResourceItem).make(Resource.cloth), self.x + Random.nextInt(11) - 5, self.y + Random.nextInt(11) - 5))
     end for
 
     if self.level.player != null then

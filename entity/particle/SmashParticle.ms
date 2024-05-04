@@ -16,7 +16,7 @@ SmashParticle.tick = function()
     self.time += 1
     if self.time > 10 then
         self.remove
-    end function
+    end if
 end function
 
 // @param {Screen} screen

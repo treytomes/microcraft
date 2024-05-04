@@ -4,3 +4,8 @@ globals.require = function(moduleName)
 	import moduleName
 	return locals[moduleName]
 end function
+
+globals.iif = function(value, ifTrue, ifFalse)
+	if value then return ifTrue
+	return ifFalse
+end function

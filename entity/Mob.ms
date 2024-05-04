@@ -101,7 +101,7 @@ end function
 Mob.heal = function(heal)
     if self.hurtTime > 0 then return
 
-    self.level.push((new TextParticle).make("" + heal, self.x, self.y, Color.get(-1, 50, 50, 50)))
+    self.level.add((new TextParticle).make("" + heal, self.x, self.y, Color.get(-1, 50, 50, 50)))
     self.health += heal
     if self.health > self.maxHealth then self.health = self.maxHealth
 end function
@@ -118,7 +118,7 @@ Mob.doHurt = function(damage, attackDir)
             Sound.monsterHurt.play()
         end if
     end if
-    self.level.push((new TextParticle).make("" + damage, self.x, self.y, Color.get(-1, 500, 500, 500)))
+    self.level.add((new TextParticle).make("" + damage, self.x, self.y, Color.get(-1, 500, 500, 500)))
     self.health -= damage
     if self.attackDir == 0 then self.yKnockback =  6
     if self.attackDir == 1 then self.yKnockback = -6

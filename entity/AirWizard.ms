@@ -40,7 +40,7 @@ AirWizard.tick = function()
         self.attackTime -= 1
         dir = self.attackTime * 0.25 * (self.attackTime % 2 * 2 - 1)
         speed = (0.7) + self.attackType * 0.2
-        self.level.push((new Spark).make(self, cos(dir) * speed, sin(dir) * speed))
+        self.level.add((new Spark).make(self, cos(dir) * speed, sin(dir) * speed))
         return
     end if
 

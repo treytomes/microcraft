@@ -1,7 +1,7 @@
 Anvil = new Furniture
 
 Anvil.make = function()
-    super("Anvil")
+    super.make("Anvil")
     self.col = Color.get(-1, 000, 111, 222)
     self.sprite = 0
     self.xr = 3

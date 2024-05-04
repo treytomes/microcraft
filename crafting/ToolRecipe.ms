@@ -4,7 +4,7 @@ ToolRecipe = new Recipe
 // @param {int} level
 // @returns {ToolRecipe}
 ToolRecipe.make = function(type, level)
-    super.make((new ToolItem(type, level)).make)
+    super.make((new ToolItem).make(type, level))
     self.type = type
     self.level = level
     return self
