@@ -167,18 +167,22 @@ tick = function
     globals.tickCount += 1
     input.tick
 
-    if input.up.clicked then print "up"
-    if input.down.clicked then print "down"
-    if input.left.clicked then print "left"
-    if input.right.clicked then print "right"
-    if input.attack.clicked then print "attack"
-    if input.menu.clicked then print "menu"
+    if input.up.clicked or input.left.clicked then
+        globals.level -= 1
+        renderLevel level 
+    end if
+    if input.down.clicked or input.right.clicked then
+        globals.level += 1
+        renderLevel level
+    end if
+    // if input.attack.clicked then print "attack"
+    // if input.menu.clicked then print "menu"
 end function
 
 events.eventLoop.onUpdate = function
     now = time
     globals.unprocessed += (now - lastTime) / secsPerTick
-    lastTime = now
+    globals.lastTime = now
 
     // print "Unprocessed: " + unprocessed
     while unprocessed >= 1
@@ -187,6 +191,56 @@ events.eventLoop.onUpdate = function
         globals.unprocessed -= 1
     end while
 end function
+
+// @param {int} level
+renderLevel = function(level)
+    SCALE = 4.5
+    setCell = function(x, y, color)
+        gfx.fillRect x * SCALE, y * SCALE, SCALE + 1, SCALE + 1, color
+    end function
+    d = 0
+
+    w = 128
+    h = 128
+
+    text.clear
+    gfx.clear
+
+    if level == -1 then
+        map = LevelGen.createAndValidateSkyMap(w, h)[0]
+    else if level == 0 then
+        map = LevelGen.createAndValidateTopMap(w, h)[0]
+    else
+        map = LevelGen.createAndValidateUndergroundMap(w, h, level)[0]
+    end if
+    // map = LevelGen.createAndValidateUndergroundMap(w, h, (d++ % 3) + 1)[0]
+    // map = LevelGen.createAndValidateSkyMap(w, h)[0]
+    for y in range(0, h - 1)
+        for x in range(0, w - 1)
+            i = x + y * w
+
+            if map[i] == Tile.water.id then setCell(x, y, "#000080")
+            if map[i] == Tile.grass.id then setCell(x, y, "#208020")
+            if map[i] == Tile.rock.id then setCell(x, y, "#a0a0a0")
+            if map[i] == Tile.dirt.id then setCell(x, y, "#604040")
+            if map[i] == Tile.sand.id then setCell(x, y, "#a0a040")
+            if map[i] == Tile.tree.id then setCell(x, y, "#003000")
+            if map[i] == Tile.lava.id then setCell(x, y, "#ff2020")
+            if map[i] == Tile.cloud.id then setCell(x, y, "#a0a0a0")
+            if map[i] == Tile.stairsDown.id then setCell(x, y, "#ffffff")
+            if map[i] == Tile.stairsUp.id then setCell(x, y, "#ffffff")
+            if map[i] == Tile.cloudCactus.id then setCell(x, y, "#ff00ff")
+        end for
+    end for
+
+    text.row = 25
+    text.column = 0
+    print "level=" + level
+end function
+
+level = 0
+
+renderLevel level
 
 tickCount = 0
 

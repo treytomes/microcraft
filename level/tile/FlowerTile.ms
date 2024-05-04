@@ -5,7 +5,8 @@ FlowerTile = new GrassTile
 FlowerTile.make = function(id)
     super.make(id)
     Tile.tiles[id] = self
-    connectsToGrass = true
+    self.connectsToGrass = true
+    return self
 end function
 
 // @param {Screen} screen

@@ -6,6 +6,7 @@ WaterTile.make = function(id)
     super.make(id)
     self.connectsToSand = true
     self.connectsToWater = true
+    return self
 end function
 
 // @param {Screen} screen

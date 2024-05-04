@@ -60,7 +60,7 @@ end function
 // @param {int} y
 // @returns {int}
 LevelGen.sample = function(x, y)
-    return self.values[bitAnd(x, (self.w - 1)) + bitAnd(y, (self.h - 1)) * w]
+    return self.values[bitAnd(x, (self.w - 1)) + bitAnd(y, (self.h - 1)) * self.w]
 end function
 
 // @param {int} x
@@ -456,39 +456,4 @@ LevelGen.createSkyMap = function(w, h)
     return [ map, data ]
 end function
 
-main = function
-    d = 0
-
-    w = 128
-    h = 128
-
-    text.clear
-    gfx.clear
-
-    map = LevelGen.createAndValidateTopMap(w, h)[0]
-    // map = LevelGen.createAndValidateUndergroundMap(w, h, (d++ % 3) + 1)[0]
-    // map = LevelGen.createAndValidateSkyMap(w, h)[0]
-    for y in range(0, h - 1)
-        for x in range(0, w - 1)
-            i = x + y * w
-
-            if map[i] == Tile.water.id then setPixel(x, y, "#000080")
-            if map[i] == Tile.grass.id then setPixel(x, y, "#208020")
-            if map[i] == Tile.rock.id then setPixel(x, y, "#a0a0a0")
-            if map[i] == Tile.dirt.id then setPixel(x, y, "#604040")
-            if map[i] == Tile.sand.id then setPixel(x, y, "#a0a040")
-            if map[i] == Tile.tree.id then setPixel(x, y, "#003000")
-            if map[i] == Tile.lava.id then setPixel(x, y, "#ff2020")
-            if map[i] == Tile.cloud.id then setPixel(x, y, "#a0a0a0")
-            if map[i] == Tile.stairsDown.id then setPixel(x, y, "#ffffff")
-            if map[i] == Tile.stairsUp.id then setPixel(x, y, "#ffffff")
-            if map[i] == Tile.cloudCactus.id then setPixel(x, y, "#ff00ff")
-        end for
-    end for
-end function
-
-if locals == globals then
-    main
-else
-    return LevelGen
-end if
+return LevelGen
