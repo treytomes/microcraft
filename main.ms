@@ -111,6 +111,9 @@ globals.TextParticle = require("TextParticle")
 // sound
 globals.Sounds = require("Sounds") // Had to rename this one to avoid naming conflicts.
 
+// level
+globals.Level = require("Level")
+
 globals.InputHandler = require("InputHandler")
 
 print "micro-hack!"
