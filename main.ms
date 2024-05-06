@@ -37,6 +37,7 @@ globals.SpriteSheet = require("SpriteSheet")
 // screen
 globals.ListItem = require("ListItem")
 
+// level/levelgen
 globals.LevelGen = require("LevelGen")
 
 // entity
@@ -113,6 +114,18 @@ globals.Sounds = require("Sounds") // Had to rename this one to avoid naming con
 
 // level
 globals.Level = require("Level")
+
+// screen
+globals.Menu = require("Menu")
+globals.AboutMenu = require("AboutMenu")
+globals.ContainerMenu = require("ContainerMenu")
+globals.CraftingMenu = require("CraftingMenu")
+globals.DeadMenu = require("DeadMenu")
+globals.InstructionsMenu = require("InstructionsMenu")
+globals.InventoryMenu = require("InventoryMenu")
+globals.LevelTransitionMenu = require("LevelTransitionMenu")
+globals.TitleMenu = require("TitleMenu")
+globals.WonMenu = require("WonMenu")
 
 globals.InputHandler = require("InputHandler")
 
