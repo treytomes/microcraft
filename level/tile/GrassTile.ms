@@ -79,7 +79,7 @@ GrassTile.interact = function(level, xt, yt, player, item, attackDir)
         if tool.type == ToolType.shovel then
             if player.payStamina(4 - tool.level) then
                 level.setTile(xt, yt, Tile.dirt, 0)
-                Sound.monsterHurt.play()
+                Sounds.monsterHurt.play()
                 if Random.nextInt(5) == 0 then
                     level.add((new ItemEntity).make((new ResourceItem).make(Resource.seeds), xt * 16 + Random.nextInt(10) + 3, yt * 16 + Random.nextInt(10) + 3))
                     return true
@@ -88,7 +88,7 @@ GrassTile.interact = function(level, xt, yt, player, item, attackDir)
         end if
         if tool.type == ToolType.hoe then
             if player.payStamina(4 - tool.level) then
-                Sound.monsterHurt.play
+                Sounds.monsterHurt.play
                 if Random.nextInt(5) == 0 then
                     level.add((new ItemEntity).make((new ResourceItem).make(Resource.seeds), xt * 16 + Random.nextInt(10) + 3, yt * 16 + Random.nextInt(10) + 3))
                     return true

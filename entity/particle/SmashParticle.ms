@@ -1,10 +1,11 @@
 // TODO: Shouldn't this inherit from Particle?
-SmashParticle = new Entity
+SmashParticle = new Particle
 
 // @param {int} x
 // @param {int} y
 // @returns {SmashParticle}
 SmashParticle.make = function(x, y)
+    super.make
     self.time = 0
     self.x = x
     self.y = y

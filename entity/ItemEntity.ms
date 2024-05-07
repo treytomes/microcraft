@@ -5,6 +5,8 @@ ItemEntity = new Entity
 // @param {int} y
 // @returns {ItemEntity}
 ItemEntity.make = function(item, x, y)
+    super.make
+    
     self.time = 0
     self.xKnockback = 0
     self.yKnockback = 0
@@ -69,10 +71,10 @@ end function
 // @param {Screen} screen
 ItemEntity.render = function(screen)
     if self.time >= self.lifeTime - 6 * 20 then
-        if floor(time / 6) % 2 == 0 then return
+        if floor(self.time / 6) % 2 == 0 then return
     end if
     screen.render(self.x - 4, self.y - 4, self.item.getSprite(), Color.get(-1, 0, 0, 0), 0)
-    screen.render(self.x - 4, self.y - 4 - floor(zz), self.item.getSprite(), self.item.getColor(), 0)
+    screen.render(self.x - 4, self.y - 4 - floor(self.zz), self.item.getSprite(), self.item.getColor(), 0)
 end function
 
 // @param {Entity} entity
@@ -82,9 +84,9 @@ end function
 
 // @param {Player} player
 ItemEntity.take = function(player)
-    Sound.pickup.play
+    Sounds.pickup.play
     player.score += 1
-    item.onTake(self)
+    self.item.onTake(self)
     self.remove
 end function
 

@@ -3,6 +3,7 @@ LevelTransitionMenu = new Menu
 // @param {int} dir
 // @returns {LevelTransitionMenu}
 LevelTransitionMenu.make = function(dir)
+    super.make
     self.time = 0
     self.dir = dir
     return self

@@ -15,16 +15,17 @@ Screen.make = function(w, h, sheet)
     self.w = w
     self.h = h
 
-    self.pixels = [0] * w * h
+    self.pixels = [0] * self.w * self.h
 
     return self
 end function
 
 // @param {int} color
 Screen.clear = function(color)
-    for i in range(self.pixels.len)
-        self.pixels[i] = color
-    end for
+    self.pixels = [color] * self.w * self.h
+    // for i in range(self.pixels.len - 1)
+    //     self.pixels[i] = color
+    // end for
 end function
 
 // @param {int} xp
@@ -35,8 +36,8 @@ end function
 Screen.render = function(xp, yp, tile, colors, bits)
     xp -= self.xOffset
     yp -= self.yOffset
-    mirrorX = bitAnd(bits, self.BIT_MIRROR_X) > 0
-    mirrorY = bitAnd(bits, self.BIT_MIRROR_Y) > 0
+    mirrorX = bitAnd(bits, Screen.BIT_MIRROR_X) > 0
+    mirrorY = bitAnd(bits, Screen.BIT_MIRROR_Y) > 0
 
     xTile = tile % 32
     yTile = floor(tile / 32)
@@ -51,8 +52,10 @@ Screen.render = function(xp, yp, tile, colors, bits)
 
             xs = x
             if mirrorX then xs = 7 - x
-            col = bitAnd((colors * (2 ^ (self.sheet.pixels[xs + ys * self.sheet.width + toffs] * 8))), 255)
-            if col < 255 then self.pixels[(x + xp) + (y + yp) * w] = col
+            col = bitAnd(floor(colors / (2 ^ (self.sheet.pixels[xs + ys * self.sheet.width + toffs] * 8))), 255)
+            // col = (colors >> (sheet.pixels[xs + ys * sheet.width + toffs] * 8)) & 255;
+
+            if col < 255 then self.pixels[(x + xp) + (y + yp) * self.w] = col
         end for
     end for
 end function

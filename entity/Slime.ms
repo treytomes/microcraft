@@ -3,6 +3,8 @@ Slime = new Mob
 // @param {int} lvl
 // @returns {Slime}
 Slime.make = function(lvl)
+    super.make
+    
     self.xa = 0
     self.ya = 0
     self.jumpTime = 0

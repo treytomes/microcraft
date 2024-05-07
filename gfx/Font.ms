@@ -1,9 +1,9 @@
 Font = {}
 
-Font.chars = " " +
+Font.chars = "" +
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ      " +
-    "0123456789.,!?'""-+=/\\%()<>:;     " +
-    " "
+    "0123456789.,!?'""-+=/\%()<>:;     " +
+    "";
 
 // @param {String} msg
 // @param {Screen} screen
@@ -13,7 +13,8 @@ Font.chars = " " +
 Font.draw = function(msg, screen, x, y, col)
     msg = msg.upper()
     for i in range(0, msg.len - 1)
-        ix = self.chars[msg[i]]
+        ch = msg[i]
+        ix = Font.chars.indexOf(ch)
         if ix >= 0 then
             screen.render(x + i * 8, y, ix + 30 * 32, col, 0)
         end if

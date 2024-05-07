@@ -1,6 +1,11 @@
 PowerGloveItem = new Item
 PowerGloveItem._class = "PowerGloveItem"
 
+// @returns {PowerGloveItem}
+PowerGloveItem.make = function
+    return self
+end function
+
 // @returns {int}
 PowerGloveItem.getColor = function()
     return Color.get(-1, 100, 320, 430)

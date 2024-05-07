@@ -1,13 +1,15 @@
 Mob = new Entity
 
 Mob.make = function()
+    super.make
+    
     self.walkDist = 0
     self.dir = 0
     self.hurtTime = 0
     self.xKnockback = 0
     self.yKnockback = 0
     self.maxHealth = 10
-    self.health = maxHealth
+    self.health = self.maxHealth
     self.swimTimer = 0
     self.tickTime = 0
 
@@ -20,8 +22,8 @@ end function
 
 Mob.tick = function()
     self.tickTime += 1
-    if refEquals(self.level.getTile(floor(x / 16), floor(y / 16)), Tile.lava) then
-        self.hurt(self, 4, bitXor(dir, 1));
+    if refEquals(self.level.getTile(floor(self.x / 16), floor(self.y / 16)), Tile.lava) then
+        self.hurt(self, 4, bitXor(self.dir, 1));
     end if
 
     if self.health <= 0 then
@@ -59,19 +61,19 @@ Mob.move = function(xa, ya)
         self.yKnockback -= 1
     end if
     if self.hurtTime > 0 then return true
-    if self.xa != 0 or self.ya != 0 then
-        walkDist += 1
-        if self.xa < 0 then self.dir = 2
-        if self.xa > 0 then self.dir = 3
-        if self.ya < 0 then self.dir = 1
-        if self.ya > 0 then self.dir = 0
+    if xa != 0 or ya != 0 then
+        self.walkDist += 1
+        if xa < 0 then self.dir = 2
+        if xa > 0 then self.dir = 3
+        if ya < 0 then self.dir = 1
+        if ya > 0 then self.dir = 0
     end if
-    return super.move(self.xa, self.ya)
+    return super.move(xa, ya)
 end function
 
 // @returns {boolean} 
 Mob.isSwimming = function()
-    tile = self.level.getTile(floor(x / 16), floor(y / 16))
+    tile = self.level.getTile(floor(self.x / 16), floor(self.y / 16))
     return refEquals(tile, Tile.water) or refEquals(tile, Tile.lava)
 end function
 
@@ -81,20 +83,20 @@ Mob.blocks = function(e)
     return e.isBlockableBy(self)
 end function
 
-// @param {Tile} tile
+// @param {Tile | Mob} tile
 // @param {int} x
 // @param {int} y
-// @param {int} damage
-Mob.hurt = function(tile, x, y, damage)
-    attackDir = bitXor(dir, 1)
-    self.doHurt(damage, attackDir)
-end function
-
-// @param {Mob} mob
-// @param {int} damage
-// @param {int} attackDir
-Mob.hurt = function(mob, damage, attackDir)
-    self.doHurt(damage, attackDir)
+// @param {int | null} damage
+Mob.hurt = function(tile, x, y, damage=null)
+    if tile isa Tile then
+        attackDir = bitXor(self.dir, 1)
+        self.doHurt(damage, attackDir)
+    else
+        mob = tile
+        damage = x
+        attackDir = y
+        self.doHurt(damage, attackDir)
+    end if
 end function
 
 // @param {int} heal
@@ -115,7 +117,7 @@ Mob.doHurt = function(damage, attackDir)
         xd = self.level.player.x - self.x
         yd = self.level.player.y - self.y
         if xd * xd + yd * yd < 80 * 80 then
-            Sound.monsterHurt.play()
+            Sounds.monsterHurt.play()
         end if
     end if
     self.level.add((new TextParticle).make("" + damage, self.x, self.y, Color.get(-1, 500, 500, 500)))

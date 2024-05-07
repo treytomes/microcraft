@@ -1,5 +1,5 @@
 Random = {}
-Random.haveNextGaussian = false
+Random.haveNextNextGaussian = false
 Random.nextNextGaussian = 0
 
 Random.nextFloat = function

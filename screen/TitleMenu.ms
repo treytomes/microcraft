@@ -3,7 +3,9 @@ TitleMenu.options = [ "Start game", "How to play", "About" ]
 
 // @returns {TitleMenu}
 TitleMenu.make = function
+    super.make
     self.selected = 0
+    return self
 end function
 
 TitleMenu.tick = function
@@ -14,9 +16,9 @@ TitleMenu.tick = function
     if self.selected < 0 then self.selected += len
     if self.selected >= len then self.selected -= len
 
-    if self.input.attack.clicked or input.menu.clicked then
-        if selected == 0 then
-            Sound.test.play
+    if self.input.attack.clicked or self.input.menu.clicked then
+        if self.selected == 0 then
+            Sounds.test.play
             self.game.resetGame
             self.game.setMenu
         end if
@@ -26,7 +28,7 @@ TitleMenu.tick = function
 end function
 
 // @param {Screen} screen
-TitleMenu.render = function
+TitleMenu.render = function(screen)
     screen.clear(0)
 
     h = 2
@@ -45,9 +47,9 @@ TitleMenu.render = function
         self.col = Color.get(0, 222, 222, 222)
         if i == self.selected then
             msg = "> " + msg + " <"
-            col = Color.get(0, 555, 555, 555)
+            self.col = Color.get(0, 555, 555, 555)
         end if
-        Font.draw(msg, screen, (screen.w - msg.length() * 8) / 2, (8 + i) * 8, col)
+        Font.draw(msg, screen, (screen.w - msg.len * 8) / 2, (8 + i) * 8, self.col)
     end for
 
     Font.draw("(Arrow keys,X and C)", screen, 0, screen.h - 8, Color.get(0, 111, 111, 111))

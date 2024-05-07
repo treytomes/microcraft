@@ -3,6 +3,8 @@ Zombie = new Mob
 // @param {int} lvl
 // @returns {Zombie}
 Zombie.make = function(lvl)
+    super.make
+    
     self.xa = 0
     self.ya = 0
     self.randomWalkTime = 0
@@ -44,8 +46,8 @@ Zombie.render = function(screen)
     xt = 0
     yt = 14
 
-    flip1 = bitAnd(floor(walkDist / 8), 1)
-    flip2 = bitAnd(floor(walkDist / 8), 1)
+    flip1 = bitAnd(floor(self.walkDist / 8), 1)
+    flip2 = bitAnd(floor(self.walkDist / 8), 1)
 
     if self.dir == 1 then
         xt += 2

@@ -1,5 +1,5 @@
 // TODO: Shouldn't this inherit from Particle?
-TextParticle = new Entity
+TextParticle = new Particle
 
 // @param {string} msg
 // @param {int} x
@@ -7,6 +7,7 @@ TextParticle = new Entity
 // @param {int} col
 // @returns {TextParticle}
 TextParticle.make = function(msg, x, y, col)
+    super.make
     self.time = 0
     self.msg = msg
     self.x = x

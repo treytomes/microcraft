@@ -2,6 +2,7 @@ WonMenu = new Menu
 
 // @returns {WonMenu}
 WonMenu.make = function
+    super.make
     self.inputDelay = 60
     return self
 end function

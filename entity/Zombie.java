@@ -47,8 +47,8 @@ public class Zombie extends Mob {
 		int xt = 0;
 		int yt = 14;
 
-		int flip1 = (walkDist >> 3) & 1;
-		int flip2 = (walkDist >> 3) & 1;
+		int flip1 = (self.walkDist >> 3) & 1;
+		int flip2 = (self.walkDist >> 3) & 1;
 
 		if (dir == 1) {
 			xt += 2;
@@ -56,11 +56,11 @@ public class Zombie extends Mob {
 		if (dir > 1) {
 
 			flip1 = 0;
-			flip2 = ((walkDist >> 4) & 1);
+			flip2 = ((self.walkDist >> 4) & 1);
 			if (dir == 2) {
 				flip1 = 1;
 			}
-			xt += 4 + ((walkDist >> 3) & 1) * 2;
+			xt += 4 + ((self.walkDist >> 3) & 1) * 2;
 		}
 
 		int xo = x - 8;

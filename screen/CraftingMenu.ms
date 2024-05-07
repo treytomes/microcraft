@@ -3,6 +3,7 @@ CraftingMenu = new Menu
 // @param {Recipe[]} recipes
 // @param {Player} player
 CraftingMenu.make = function(recipes, player)
+    super.make
     self.selected = 0
 
     self.recipes = recipes
@@ -13,6 +14,7 @@ CraftingMenu.make = function(recipes, player)
     end for
 
     self.recipes.sort "canCraft"
+    return self
 end function
 
 CraftingMenu.tick = function
@@ -32,7 +34,7 @@ CraftingMenu.tick = function
         if r.canCraft then
             r.deductCost(player)
             r.craft(player)
-            Sound.craft.play
+            Sounds.craft.play
         end if
         for i in range(0, recipes.len - 1)
             self.recipes[i].checkCanCraft(player)

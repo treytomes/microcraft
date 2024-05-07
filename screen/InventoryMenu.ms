@@ -3,6 +3,7 @@ InventoryMenu = new Menu
 // @param {Player} player
 // @returns {self}
 InventoryMenu.make = function(player)
+    super.make
     self.player = player
     self.selected = 0
 
@@ -10,6 +11,7 @@ InventoryMenu.make = function(player)
         self.player.inventory.items.insert(0, self.player.activeItem)
         self.player.activeItem = null
     end if
+    return self
 end function
 
 InventoryMenu.tick = function()

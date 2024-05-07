@@ -13,7 +13,7 @@ Entity.make = function()
 end function
 
 Entity.init = function(level)
-    self.leve = level
+    self.level = level
 end function
 
 // @param {Screen} screen
@@ -67,7 +67,7 @@ Entity.move = function(xa, ya)
         if ya != 0 and self.move2(0, ya) then stopped = false
         if not stopped then
             xt = floor(self.x / 16)
-            yt = self(self.y / 16)
+            yt = floor(self.y / 16)
             self.level.getTile(xt, yt).steppedOn(self.level, xt, yt, self)
         end if
         return not stopped
@@ -113,8 +113,7 @@ Entity.move2 = function(xa, ya)
     end for
 
     //isInside.removeAll(wasInside)
-    for i in range(0, isInside.len)
-        e = isInside[i]
+    for e in isInside
         if wasInside.contains(e) then continue
         if refEquals(e, self) then continue
 

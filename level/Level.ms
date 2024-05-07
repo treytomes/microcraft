@@ -16,6 +16,9 @@ Level.make = function(w, h, level, parentLevel)
     self.depth = level
     self.w = w
     self.h = h
+    self.entities = []
+    self.player = null
+    self.rowSprites = []
 
     if level == 1 then
         self.dirtColor = 444
@@ -62,10 +65,10 @@ Level.make = function(w, h, level, parentLevel)
         end for
     end if
 
-    self.entitiesInTiles = [0] * self.w * self.h
-    for i in range(0, self.w * self.h - 1)
-        self.entitiesInTiles[i] = []
-    end for
+    self.entitiesInTiles = [[]] * self.w * self.h
+    // for i in range(0, self.w * self.h - 1)
+    //     self.entitiesInTiles[i] = []
+    // end for
     
     if level == 1 then
         aw = (new AirWizard).make
@@ -107,7 +110,9 @@ Level.renderSprites = function(screen, xScroll, yScroll)
     for y in range(yo, h + yo)
         for x in range(xo, w + xo)
             if x < 0 or y < 0 or x >= self.w or y >= self.h then continue
-            self.rowSprites.addAll(self.entitiesInTiles[x + y * self.w])
+            for e in self.entitiesInTiles[x + y * self.w]
+                self.rowSprites.push e
+            end for
         end for
         if self.rowSprites.len > 0 then
             self.sortAndRender(screen, self.rowSprites)
@@ -157,7 +162,7 @@ end function
 // @param {int} y
 // @returns {Tile}
 Level.getTile = function(x, y)
-    if x < 0 or y < 0 or x >= self.w or y >= h then return Tile.rock
+    if x < 0 or y < 0 or x >= self.w or y >= self.h then return Tile.rock
     return Tile.tiles[self.tiles[x + y * self.w]]
 end function
 
@@ -190,7 +195,7 @@ end function
 // @param {Entity} entity
 Level.add = function(entity)
     if entity isa Player then
-        player = entity
+        self.player = entity
     end if
     entity.removed = false
     self.entities.push(entity)
@@ -211,7 +216,7 @@ end function
 // @param {int} y
 // @param {Entity} e
 Level.insertEntity = function(x, y, e)
-    if x < 0 or y < 0 or x >= self.w or y >= h then return
+    if x < 0 or y < 0 or x >= self.w or y >= self.h then return
     self.entitiesInTiles[x + y * self.w].push(e)
 end function
 
@@ -221,20 +226,26 @@ end function
 Level.removeEntity = function(x, y, e)
     if x < 0 or y < 0 or x >= self.w or y >= self.h then return
     offset = x + y * self.w
-    for n in range(0, self.entitiesInTiles[offset].len - 1)
-        if refEquals(e, self.entitiesInTiles[offset][n]) then
+
+    n = 0
+    while n < self.entitiesInTiles[offset].len
+        tileEntity = self.entitiesInTiles[offset][n]
+        if refEquals(e, tileEntity) then
             self.entitiesInTiles[offset].remove(n)
+            n -= 1
         end if
-    end for
+        n += 1
+    end while
 end function
 
 // @param {int} count
-Level.trySpawn = function(count)
+Level.trySpawn = function(count) //, iter=0)
     for i in range(0, count - 1)
+        // print "iter: " + iter + ", i=" + i
         minLevel = 1
         maxLevel = 1
         if self.depth < 0 then
-            maxLevel = (-depth) + 1
+            maxLevel = (-self.depth) + 1
         end if
         if self.depth > 0 then
             maxLevel = 4
@@ -257,9 +268,9 @@ end function
 Level.tick = function
     self.trySpawn(1)
 
-    for i in range(0, w * h / 50 - 1)
-        xt = Random.nextInt(w)
-        yt = Random.nextInt(w)
+    for i in range(0, self.w * self.h / 50 - 1)
+        xt = Random.nextInt(self.w)
+        yt = Random.nextInt(self.w)
         self.getTile(xt, yt).tick(self, xt, yt)
     end for
     for i in range(self.entities.len - 1)
@@ -300,8 +311,7 @@ Level.getEntities = function(x0, y0, x1, y1)
         for x in range(xt0, xt1)
             if x < 0 or y < 0 or x >= self.w or y >= self.h then continue
             entities = self.entitiesInTiles[x + y * self.w]
-            for i in range(entities.len - 1)
-                e = entities[i]
+            for e in entities
                 if e.intersects(x0, y0, x1, y1) then result.push(e)
             end for
         end for

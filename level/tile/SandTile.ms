@@ -59,8 +59,8 @@ end function
 // @param {int} xt
 // @param {int} yt
 SandTile.tick = function(level, xt, yt)
-    d = level.getData(x, y)
-    if d > 0 then level.setData(x, y, d - 1)
+    d = level.getData(xt, yt)
+    if d > 0 then level.setData(xt, yt, d - 1)
 end function
 
 // @param {Level} level
@@ -69,7 +69,7 @@ end function
 // @param {Entity} entity
 SandTile.steppedOn = function(level, xt, yt, entity)
     if entity isa Mob then
-        level.setData(x, y, 10)
+        level.setData(xt, yt, 10)
     end if
 end function
 

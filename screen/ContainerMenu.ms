@@ -4,6 +4,7 @@ ContainerMenu = new Menu
 // @param {string} title
 // @param {Inventory} container
 ContainerMenu.make = function(player, title, container)
+    super.make
     self.selected = 0
     self.oSelected = 0
     self.window = 0;

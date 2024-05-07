@@ -3,6 +3,7 @@ AboutMenu = new Menu
 // @param {Menu} parent
 // @returns {AboutMenu}
 AboutMenu.make = function(parent)
+    super.make
     self.parent = parent
     return self
 end function

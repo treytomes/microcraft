@@ -5,6 +5,8 @@ Spark = new Entity
 // @param {double} ya
 // @returns Spark
 Spark.make = function(owner, xa, ya)
+    super.make
+    
     self.time = 0
     self.owner = owner
     self.x = owner.x

@@ -2,6 +2,7 @@ DeadMenu = new Menu
 
 // @returns {DeadMenu}
 DeadMenu.make = function()
+    super.make
     self.inputDelay = 60
     return self
 end function

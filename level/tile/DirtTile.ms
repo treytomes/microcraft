@@ -33,14 +33,14 @@ DirtTile.interact = function(level, xt, yt, player, item, attackDir)
             if player.payStamina(4 - tool.level) then
                 level.setTile(xt, yt, Tile.hole, 0)
                 level.add((new ItemEntity).make((new ResourceItem).make(Resource.dirt), xt * 16 + Random.nextInt(10) + 3, yt * 16 + Random.nextInt(10) + 3))
-                Sound.monsterHurt.play
+                Sounds.monsterHurt.play
                 return true
             end if
         end if
         if tool.type == ToolType.hoe then
             if player.payStamina(4 - tool.level) then
                 level.setTile(xt, yt, Tile.farmland, 0)
-                Sound.monsterHurt.play
+                Sounds.monsterHurt.play
                 return true
             end if
         end if

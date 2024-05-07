@@ -2,6 +2,8 @@ AirWizard = new Mob
 
 // @returns {AirWizard}
 AirWizard.make = function
+    super.make
+    
     self.xa = 0
     self.ya = 0
     self.randomWalkTime = 0
@@ -98,19 +100,19 @@ AirWizard.render = function(screen)
     xt = 8
     yt = 14
 
-    flip1 = bitAnd(floor(walkDist / 8 ), 1)
-    flip2 = bitAnd(floor(walkDist / 8), 1)
+    flip1 = bitAnd(floor(self.walkDist / 8 ), 1)
+    flip2 = bitAnd(floor(self.walkDist / 8), 1)
 
     if self.dir == 1 then
         xt += 2
     end if
     if self.dir > 1 then
         flip1 = 0
-        flip2 = bitAnd(floor(self.walkDist / 16), 1)
+        flip2 = bitAnd(floor(self.self.walkDist / 16), 1)
         if self.dir == 2 then
             flip1 = 1
         end if
-        xt += 4 + bitAnd(floor(walkDist / 8), 1) * 2
+        xt += 4 + bitAnd(floor(self.walkDist / 8), 1) * 2
     end if
 
     xo = x - 8
@@ -153,7 +155,7 @@ AirWizard.die = function
         game.level.player.score += 1000
         game.level.player.gameWon
     end if
-    Sound.bossdeath.play
+    Sounds.bossdeath.play
 end function
 
 return AirWizard

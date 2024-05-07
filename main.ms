@@ -25,6 +25,8 @@ env.addImportPath "./level/tile"
 env.addImportPath "./screen"
 env.addImportPath "./sound"
 
+globals.DEBUG = true
+
 globals.Random = require("Random")
 
 // gfx
@@ -128,84 +130,97 @@ globals.TitleMenu = require("TitleMenu")
 globals.WonMenu = require("WonMenu")
 
 globals.InputHandler = require("InputHandler")
+globals.Game = require("Game")
 
-print "micro-hack!"
+events.eventLoop.onKeyDown["[8]"] = function; game.input.up.toggle(true); end function
+events.eventLoop.onKeyDown["[2]"] = function; game.input.down.toggle(true); end function
+events.eventLoop.onKeyDown["[4]"] = function; game.input.left.toggle(true); end function
+events.eventLoop.onKeyDown["[6]"] = function; game.input.right.toggle(true); end function
+events.eventLoop.onKeyDown["w"] = function; game.input.up.toggle(true); end function
+events.eventLoop.onKeyDown["s"] = function; game.input.down.toggle(true); end function
+events.eventLoop.onKeyDown["a"] = function; game.input.left.toggle(true); end function
+events.eventLoop.onKeyDown["d"] = function; game.input.right.toggle(true); end function
+events.eventLoop.onKeyDown["up"] = function; game.input.up.toggle(true); end function
+events.eventLoop.onKeyDown["down"] = function; game.input.down.toggle(true); end function
+events.eventLoop.onKeyDown["left"] = function; game.input.left.toggle(true); end function
+events.eventLoop.onKeyDown["right"] = function; game.input.right.toggle(true); end function
 
-input = (new InputHandler).make
+events.eventLoop.onKeyDown["tab"] = function; game.input.menu.toggle(true); end function
+events.eventLoop.onKeyDown["left alt"] = function; game.input.menu.toggle(true); end function
+events.eventLoop.onKeyDown["right alt"] = function; game.input.menu.toggle(true); end function
+events.eventLoop.onKeyDown["enter"] = function; game.input.menu.toggle(true); end function
+events.eventLoop.onKeyDown["return"] = function; game.input.menu.toggle(true); end function
+events.eventLoop.onKeyDown["x"] = function; game.input.menu.toggle(true); end function
+events.eventLoop.onKeyDown["space"] = function; game.input.attack.toggle(true); end function
+events.eventLoop.onKeyDown["[0]"] = function; game.input.attack.toggle(true); end function
+events.eventLoop.onKeyDown["c"] = function; game.input.attack.toggle(true); end function
 
-events.eventLoop.onKeyDown["[8]"] = function; input.up.toggle(true); end function
-events.eventLoop.onKeyDown["[2]"] = function; input.down.toggle(true); end function
-events.eventLoop.onKeyDown["[4]"] = function; input.left.toggle(true); end function
-events.eventLoop.onKeyDown["[6]"] = function; input.right.toggle(true); end function
-events.eventLoop.onKeyDown["w"] = function; input.up.toggle(true); end function
-events.eventLoop.onKeyDown["s"] = function; input.down.toggle(true); end function
-events.eventLoop.onKeyDown["a"] = function; input.left.toggle(true); end function
-events.eventLoop.onKeyDown["d"] = function; input.right.toggle(true); end function
-events.eventLoop.onKeyDown["up"] = function; input.up.toggle(true); end function
-events.eventLoop.onKeyDown["down"] = function; input.down.toggle(true); end function
-events.eventLoop.onKeyDown["left"] = function; input.left.toggle(true); end function
-events.eventLoop.onKeyDown["right"] = function; input.right.toggle(true); end function
+events.eventLoop.onKeyUp["[8]"] = function; game.input.up.toggle(false); end function
+events.eventLoop.onKeyUp["[2]"] = function; game.input.down.toggle(false); end function
+events.eventLoop.onKeyUp["[4]"] = function; game.input.left.toggle(false); end function
+events.eventLoop.onKeyUp["[6]"] = function; game.input.right.toggle(false); end function
+events.eventLoop.onKeyUp["w"] = function; game.input.up.toggle(false); end function
+events.eventLoop.onKeyUp["s"] = function; game.input.down.toggle(false); end function
+events.eventLoop.onKeyUp["a"] = function; game.input.left.toggle(false); end function
+events.eventLoop.onKeyUp["d"] = function; game.input.right.toggle(false); end function
+events.eventLoop.onKeyUp["up"] = function; game.input.up.toggle(false); end function
+events.eventLoop.onKeyUp["down"] = function; game.input.down.toggle(false); end function
+events.eventLoop.onKeyUp["left"] = function; game.input.left.toggle(false); end function
+events.eventLoop.onKeyUp["right"] = function; game.input.right.toggle(false); end function
 
-events.eventLoop.onKeyDown["tab"] = function; input.menu.toggle(true); end function
-events.eventLoop.onKeyDown["left alt"] = function; input.menu.toggle(true); end function
-events.eventLoop.onKeyDown["right alt"] = function; input.menu.toggle(true); end function
-events.eventLoop.onKeyDown["enter"] = function; input.menu.toggle(true); end function
-events.eventLoop.onKeyDown["return"] = function; input.menu.toggle(true); end function
-events.eventLoop.onKeyDown["x"] = function; input.menu.toggle(true); end function
-events.eventLoop.onKeyDown["space"] = function; input.attack.toggle(true); end function
-events.eventLoop.onKeyDown["[0]"] = function; input.attack.toggle(true); end function
-events.eventLoop.onKeyDown["c"] = function; input.attack.toggle(true); end function
+events.eventLoop.onKeyUp["tab"] = function; game.input.menu.toggle(false); end function
+events.eventLoop.onKeyUp["left alt"] = function; game.input.menu.toggle(false); end function
+events.eventLoop.onKeyUp["right alt"] = function; game.input.menu.toggle(false); end function
+events.eventLoop.onKeyUp["enter"] = function; game.input.menu.toggle(false); end function
+events.eventLoop.onKeyUp["return"] = function; game.input.menu.toggle(false); end function
+events.eventLoop.onKeyUp["x"] = function; game.input.menu.toggle(false); end function
+events.eventLoop.onKeyUp["space"] = function; game.input.attack.toggle(false); end function
+events.eventLoop.onKeyUp["[0]"] = function; game.input.attack.toggle(false); end function
+events.eventLoop.onKeyUp["c"] = function; game.input.attack.toggle(false); end function
 
-events.eventLoop.onKeyUp["[8]"] = function; input.up.toggle(false); end function
-events.eventLoop.onKeyUp["[2]"] = function; input.down.toggle(false); end function
-events.eventLoop.onKeyUp["[4]"] = function; input.left.toggle(false); end function
-events.eventLoop.onKeyUp["[6]"] = function; input.right.toggle(false); end function
-events.eventLoop.onKeyUp["w"] = function; input.up.toggle(false); end function
-events.eventLoop.onKeyUp["s"] = function; input.down.toggle(false); end function
-events.eventLoop.onKeyUp["a"] = function; input.left.toggle(false); end function
-events.eventLoop.onKeyUp["d"] = function; input.right.toggle(false); end function
-events.eventLoop.onKeyUp["up"] = function; input.up.toggle(false); end function
-events.eventLoop.onKeyUp["down"] = function; input.down.toggle(false); end function
-events.eventLoop.onKeyUp["left"] = function; input.left.toggle(false); end function
-events.eventLoop.onKeyUp["right"] = function; input.right.toggle(false); end function
+// tick = function
+//     globals.tickCount += 1
+//     input.tick
 
-events.eventLoop.onKeyUp["tab"] = function; input.menu.toggle(false); end function
-events.eventLoop.onKeyUp["left alt"] = function; input.menu.toggle(false); end function
-events.eventLoop.onKeyUp["right alt"] = function; input.menu.toggle(false); end function
-events.eventLoop.onKeyUp["enter"] = function; input.menu.toggle(false); end function
-events.eventLoop.onKeyUp["return"] = function; input.menu.toggle(false); end function
-events.eventLoop.onKeyUp["x"] = function; input.menu.toggle(false); end function
-events.eventLoop.onKeyUp["space"] = function; input.attack.toggle(false); end function
-events.eventLoop.onKeyUp["[0]"] = function; input.attack.toggle(false); end function
-events.eventLoop.onKeyUp["c"] = function; input.attack.toggle(false); end function
-
-tick = function
-    globals.tickCount += 1
-    input.tick
-
-    if input.up.clicked or input.left.clicked then
-        globals.level -= 1
-        renderLevel level 
-    end if
-    if input.down.clicked or input.right.clicked then
-        globals.level += 1
-        renderLevel level
-    end if
-    // if input.attack.clicked then print "attack"
-    // if input.menu.clicked then print "menu"
-end function
+//     if input.up.clicked or input.left.clicked then
+//         globals.level -= 1
+//         renderLevel level 
+//     end if
+//     if input.down.clicked or input.right.clicked then
+//         globals.level += 1
+//         renderLevel level
+//     end if
+//     // if input.attack.clicked then print "attack"
+//     // if input.menu.clicked then print "menu"
+// end function
 
 events.eventLoop.onUpdate = function
     now = time
     globals.unprocessed += (now - lastTime) / secsPerTick
     globals.lastTime = now
 
-    // print "Unprocessed: " + unprocessed
-    while unprocessed >= 1
-        globals.ticks += 1
-        tick
-        globals.unprocessed -= 1
-    end while
+    // TODO: This is important, but we just can't keep up with unprocessed frames right now.
+    // while unprocessed >= 1
+    //     globals.ticks += 1
+    //     print "Unprocessed: " + unprocessed
+    //     game.tick
+    //     globals.unprocessed -= 1
+    // end while
+    globals.ticks += 1
+    game.tick
+
+    // TODO: Yield here?
+
+    globals.frames += 1
+    game.render
+
+    // TODO: I don't think we need this right now.
+    // if time - lastTimer1 > 1 then
+    //     globals.lastTimer1 += 1
+    //     print ticks + " ticks, " + frames + " fps"
+    //     globals.frames = 0
+    //     globals.ticks = 0
+    // end if
 end function
 
 // @param {int} level
@@ -254,13 +269,21 @@ renderLevel = function(level)
     print "level=" + level
 end function
 
-level = 0
+// print "micro-hack!"
 
-renderLevel level
+// input = (new InputHandler).make
 
-tickCount = 0
+// level = 0
+// renderLevel level
+
+// tickCount = 0
+
+game = Game.make
+game.start
+game.init
 
 lastTime = time
+lastTimer1 = time
 unprocessed = 0
 secsPerTick = 1 / 60
 frames = 0

@@ -3,12 +3,14 @@ InstructionsMenu = new Menu
 // @param {Menu} parent
 // @return {InstructionsMenu}
 InstructionsMenu.make = function(parent)
+    super.make
     self.parent = parent
+    return self
 end function
 
 InstructionsMenu.tick = function
     if self.input.attack.clicked or self.input.menu.clicked then
-        game.setMenu(parent)
+        self.game.setMenu(self.parent)
     end if
 end function
 

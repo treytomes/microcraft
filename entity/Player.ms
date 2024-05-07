@@ -4,6 +4,8 @@ Player = new Mob
 // @param {InputHandler} input
 // @returns {Player}
 Player.make = function(game, input)
+    super.make
+    
     self.attackTime = 0
     self.attackDir = 0
 
@@ -21,10 +23,10 @@ Player.make = function(game, input)
     self.input = input
     self.x = 24
     self.y = 24
-    self.stamina = maxStamina
+    self.stamina = self.maxStamina
 
-    inventory.push((new FurnitureItem).make((new Workbench).make))
-    inventory.push((new PowerGloveItem).make)
+    self.inventory.push((new FurnitureItem).make((new Workbench).make))
+    self.inventory.push((new PowerGloveItem).make)
 
     return self
 end function
@@ -33,7 +35,7 @@ Player.tick = function()
     super.tick
 
     if self.invulnerableTime > 0 then self.invulnerableTime -= 1
-    onTile = self.level.getTile(floor(x / 16), floor(y / 16))
+    onTile = self.level.getTile(floor(self.x / 16), floor(self.y / 16))
     if refEquals(onTile, Tile.stairsDown) or refEquals(onTile, Tile.stairsUp) then
         if self.onStairDelay == 0 then
             if refEquals(onTile, Tile.stairsUp) then
@@ -64,7 +66,7 @@ Player.tick = function()
         end if
         while self.staminaRecharge > 10
             self.staminaRecharge -= 10
-            if self.stamina < self.maxStamina then stamina += 1
+            if self.stamina < self.maxStamina then self.stamina += 1
         end while
     end if
 
@@ -196,8 +198,7 @@ end function
 // @returns boolean
 Player.use = function(x0, y0, x1, y1)
     entities = self.level.getEntities(x0, y0, x1, y1)
-    for i in range(0, entities.len - 1)
-        e = entities[i]
+    for e in entities
         if not refEquals(e, self) then
             if e.use(self, self.attackDir) then
                 return true
@@ -214,8 +215,7 @@ end function
 // @returns boolean
 Player.interact = function(x0, y0, x1, y1)
     entities = self.level.getEntities(x0, y0, x1, y1)
-    for i in range(0, entities.len - 1)
-        e = entities[i]
+    for e in entities
         if not refEquals(e, self) then
             if e.interact(self, self.activeItem, self.attackDir) then
                 return true
@@ -231,8 +231,7 @@ end function
 // @param {int} y1
 Player.hurt = function(x0, y0, x1, y1)
     entities = self.level.getEntities(x0, y0, x1, y1)
-    for i in range(entities.len - 1)
-        e = entities[i]
+    for e in entities
         if not refEquals(e, self) then e.hurt(self, self.getAttackDamage(e), self.attackDir)
     end for
 end function
@@ -264,7 +263,7 @@ Player.render = function(screen)
         if self.dir == 2 then
             flip1 = 1
         end if
-        xt += 4 + bitAnd(floor(walkDist / 8), 1) * 2
+        xt += 4 + bitAnd(floor(self.walkDist / 8), 1) * 2
     end if
 
     xo = self.x - 8
@@ -383,7 +382,7 @@ end function
 
 Player.die = function()
     super.die
-    Sound.playerDeath.play
+    Sounds.playerDeath.play
 end function
 
 // @param {Entity} entity
@@ -398,7 +397,7 @@ end function
 Player.doHurt = function(damage, attackDir)
     if self.hurtTime > 0 or self.invulnerableTime > 0 then return
 
-    Sound.playerHurt.play()
+    Sounds.playerHurt.play()
     self.level.add((new TextParticle).make("" + damage, self.x, self.y, Color.get(-1, 504, 504, 504)))
     self.health -= damage
     if self.attackDir == 0 then self.yKnockback =  6
