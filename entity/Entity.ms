@@ -42,19 +42,13 @@ Entity.blocks = function(e)
     return false
 end function
 
-// TODO: Renamed hurt/hurt to hurtMob/hurtTile!
-
-// @param {Mob} mob
-// @param {int} dmg
-// @param {int} attackDir
-Entity.hurtMob = function(mob, dmg, attackDir)
-end function
-
-// @param {Tile} tile
-// @param {int} x
-// @param {int} y
-// @param {int} dmg
-Entity.hurtTile = function(tile, x, y, dmg)
+// @param {Level} level
+// @param {int} xt
+// @param {int} yt
+// @param {Mob | int} source
+// @param {int | null} dmg
+// @param {int | null} attackDir
+Entity.hurt = function(level, x, y, source, dmg = null, attackDir = null)
 end function
 
 // @param {int} xa

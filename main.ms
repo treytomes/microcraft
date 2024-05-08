@@ -25,8 +25,6 @@ env.addImportPath "./level/tile"
 env.addImportPath "./screen"
 env.addImportPath "./sound"
 
-globals.DEBUG = true
-
 globals.Random = require("Random")
 
 // gfx

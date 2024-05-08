@@ -80,7 +80,8 @@ Game.resetGame = function
     self.levels = [null] * 5
     self.currentLevel = 3
 
-    if not globals.DEBUG or self.levels[0] == null then
+    // TODO: Make sure you get a new game on a real in-game reset.
+    if not self.menu isa TitleMenu then
         print "Generating levels..."
         self.levels[4] = (new Level).make(128, 128, 1, null)
         print "Level 4 done."
@@ -107,9 +108,10 @@ Game.resetGame = function
             self.levels[i].trySpawn(20) //, i)
         end for
         print "Done spawning entities."
-
-        text.clear
     end if
+
+    text.clear
+    gfx.clear
 end function
 
 Game.init = function

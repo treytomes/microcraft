@@ -40,9 +40,14 @@ Menu.renderItemList = function(screen, xo, yo, x1, y1, listItems, selected)
     if io > listItems.len - h then io = listItems.len - h
     if io < 0 then io = 0
 
-    for i in range(i0, i1 - 1)
-        listItems[i + io].renderInventory(screen, (1 + xo) * 8, (i + 1 + yo) * 8)
-    end for
+    if listItems.len > 0 then
+        for i in range(i0, i1 - 1)
+            listOffset = i + io
+            if listOffset >= 0 and listOffset < listItems.len then
+                listItems[listOffset].renderInventory(screen, (1 + xo) * 8, (i + 1 + yo) * 8)
+            end if
+        end for
+    end if
 
     if renderCursor then
         yy = selected + 1 - io + yo

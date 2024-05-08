@@ -58,7 +58,7 @@ Zombie.render = function(screen)
         if self.dir == 2 then
             flip1 = 1
         end if
-        xt += 4 + bitAnd(floor(walkDist / 8), 1) * 2
+        xt += 4 + bitAnd(floor(self.walkDist / 8), 1) * 2
     end if
 
     xo = self.x - 8
