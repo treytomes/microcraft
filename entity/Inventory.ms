@@ -31,10 +31,9 @@ end function
 // @param {Resource} resource
 // @returns {ResourceItem}
 Inventory.findResource = function(resource)
-    for i in range(0, self.items.len - 1)
-        if items[i] isa ResourceItem then
-            has = items[i]
-            if refEquals(has.resource, resource) then return has
+    for item in items
+        if item isa ResourceItem then
+            if refEquals(item.resource, resource) then return item
         end if
     end for
     return null
