@@ -138,9 +138,6 @@ image = file.loadImage("assets/icons.png")
 
 sheet = (new SpriteSheet).make(image)
 
-
-print sheet.pixels[0]
-
 screen = (new Screen).make(Game.WIDTH, Game.HEIGHT, sheet)
 
 titleMenu = (new TitleMenu).make

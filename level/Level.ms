@@ -94,7 +94,7 @@ Level.renderBackground = function(screen, xScroll, yScroll)
             self.getTile(x, y).render(screen, self, x, y)
         end for
     end for
-    screen.setOffset(0, 0)
+    // screen.setOffset(0, 0)
 end function
 
 // @param {Screen} screen
@@ -119,7 +119,7 @@ Level.renderSprites = function(screen, xScroll, yScroll)
         end if
         self.rowSprites = []
     end for
-    screen.setOffset(0, 0)
+    // screen.setOffset(0, 0)
 end function
 
 // @param {Screen} screen
@@ -146,7 +146,7 @@ Level.renderLight = function(screen, xScroll, yScroll)
             if lr > 0 then screen.renderLight(x * 16 + 8, y * 16 + 8, lr * 8)
         end for
     end for
-    screen.setOffset(0, 0)
+    // screen.setOffset(0, 0)
 end function
 
 // @param {Screen} screen

@@ -15,7 +15,8 @@ Screen.make = function(w, h, sheet)
     self.w = w
     self.h = h
 
-    // self.pixels = [0] * self.w * self.h
+    self.displayIndex = null
+
     self.display = new PixelDisplay
     self.display.scale = Game.SCALE
 
@@ -25,10 +26,11 @@ Screen.make = function(w, h, sheet)
     return self
 end function
 
-Screen.install = function
-    self.display.install 5
-    display(5).move = self.display.mode
-    display(5).scale = Game.SCALE
+Screen.install = function(index=null)
+    if index != null then self.displayIndex = index
+    self.display.install self.displayIndex
+    display(self.displayIndex).mode = self.display.mode
+    display(self.displayIndex).scale = Game.SCALE
 end function
 
 Screen.flip = function
@@ -39,8 +41,12 @@ Screen.flip = function
 end function
 
 // @param {int} color
-Screen.clear = function(color)
-    self.backBuffer.clear Game.COLORS[color]
+Screen.clear = function(c)
+    if c < 0 then
+        self.backBuffer.clear color.clear
+    else
+        self.backBuffer.clear Game.COLORS[c]
+    end if
 
     // self.pixels = [color] * self.w * self.h
 
@@ -52,7 +58,7 @@ end function
 // @param {int} xp
 // @param {int} yp
 // @param {int} tile
-// @param {int} colors
+// @param {int[]} colors
 // @param {int} bits
 Screen.render = function(xp, yp, tile, colors, bits)
     xp -= self.xOffset
@@ -74,7 +80,8 @@ Screen.render = function(xp, yp, tile, colors, bits)
 
             xs = x
             if mirrorX then xs = 7 - x
-            col = bitAnd(floor(colors / (2 ^ (self.sheet.pixels[xs + ys * self.sheet.width + toffs] * 8))), 255)
+            col = colors[self.sheet.pixels[xs + ys * self.sheet.width + toffs]]
+            // col = bitAnd(floor(colors / (2 ^ (self.sheet.pixels[xs + ys * self.sheet.width + toffs] * 8))), 255)
             // col = (colors >> (sheet.pixels[xs + ys * sheet.width + toffs] * 8)) & 255;
 
             if col < 255 then

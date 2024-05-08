@@ -11,6 +11,7 @@ Game.make = function
     self.running = false
     self.screen = null
     self.lightScreen = null
+    self.guiScreen = null
     self.input = (new InputHandler).make
 
     self.tickCount = 0
@@ -117,9 +118,12 @@ end function
 
 Game.init = function
     self.screen = (new Screen).make(Game.WIDTH, Game.HEIGHT, (new SpriteSheet).make(Game.IMAGE))
-    self.screen.install
+    self.screen.install 6
     
     self.lightScreen = (new Screen).make(Game.WIDTH, Game.HEIGHT, (new SpriteSheet).make(Game.IMAGE))
+
+    self.guiScreen = (new Screen).make(Game.WIDTH, Game.HEIGHT, (new SpriteSheet).make(Game.IMAGE))
+    self.guiScreen.install 5
 
     // This is causing the levels array to be generated on load *and* on start game.
     self.resetGame()
@@ -268,6 +272,7 @@ Game.render = function
     // end for
 
     self.screen.flip
+    self.guiScreen.flip
 
     // img = self.screen.display.getImage
     // img.flip true
@@ -275,39 +280,41 @@ Game.render = function
 end function
 
 Game.renderGui = function
+    self.guiScreen.clear -1
+
     for y in range(0, 2 - 1)
         for x in range(0, 20 - 1)
-            self.screen.render(x * 8, self.screen.h - 16 + y * 8, 0 + 12 * 32, Color.get(000, 000, 000, 000), 0)
+            self.guiScreen.render(x * 8, self.guiScreen.h - 16 + y * 8, 0 + 12 * 32, Color.get(000, 000, 000, 000), 0)
         end for
     end for
 
     for i in range(0, 10 - 1)
         if i < self.player.health then
-            self.screen.render(i * 8, self.screen.h - 16, 0 + 12 * 32, Color.get(000, 200, 500, 533), 0)
+            self.guiScreen.render(i * 8, self.guiScreen.h - 16, 0 + 12 * 32, Color.get(000, 200, 500, 533), 0)
         else
-            self.screen.render(i * 8, self.screen.h - 16, 0 + 12 * 32, Color.get(000, 100, 000, 000), 0)
+            self.guiScreen.render(i * 8, self.guiScreen.h - 16, 0 + 12 * 32, Color.get(000, 100, 000, 000), 0)
         end if
 
         if self.player.staminaRechargeDelay > 0 then
             if floor(plaself.playeryer.staminaRechargeDelay / 4) % 2 == 0 then
-                self.screen.render(i * 8, self.screen.h - 8, 1 + 12 * 32, Color.get(000, 555, 000, 000), 0)
+                self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 555, 000, 000), 0)
             else
-                self.screen.render(i * 8, self.screen.h - 8, 1 + 12 * 32, Color.get(000, 110, 000, 000), 0)
+                self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 110, 000, 000), 0)
             end if
         else
             if i < self.player.stamina then
-                self.screen.render(i * 8, self.screen.h - 8, 1 + 12 * 32, Color.get(000, 220, 550, 553), 0)
+                self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 220, 550, 553), 0)
             else
-                self.screen.render(i * 8, self.screen.h - 8, 1 + 12 * 32, Color.get(000, 110, 000, 000), 0)
+                self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 110, 000, 000), 0)
             end if
         end if
     end for
     if self.player.activeItem != null then
-        self.player.activeItem.renderInventory(self.screen, 10 * 8, self.screen.h - 16)
+        self.player.activeItem.renderInventory(self.guiScreen, 10 * 8, self.guiScreen.h - 16)
     end if
 
     if self.menu != null then
-        self.menu.render(self.screen)
+        self.menu.render(self.guiScreen)
     end if
 end function
 
