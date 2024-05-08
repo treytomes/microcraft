@@ -15,14 +15,35 @@ Screen.make = function(w, h, sheet)
     self.w = w
     self.h = h
 
-    self.pixels = [0] * self.w * self.h
+    // self.pixels = [0] * self.w * self.h
+    self.display = new PixelDisplay
+    self.display.scale = Game.SCALE
+
+    self.backBuffer = new PixelDisplay
+    self.backBuffer.scale = Game.SCALE
 
     return self
 end function
 
+Screen.install = function
+    self.display.install 5
+    display(5).move = self.display.mode
+    display(5).scale = Game.SCALE
+end function
+
+Screen.flip = function
+    tmp = self.backBuffer
+    self.backBuffer = self.display
+    self.display = tmp
+    self.install
+end function
+
 // @param {int} color
 Screen.clear = function(color)
-    self.pixels = [color] * self.w * self.h
+    self.backBuffer.clear Game.COLORS[color]
+
+    // self.pixels = [color] * self.w * self.h
+
     // for i in range(self.pixels.len - 1)
     //     self.pixels[i] = color
     // end for
@@ -36,6 +57,7 @@ end function
 Screen.render = function(xp, yp, tile, colors, bits)
     xp -= self.xOffset
     yp -= self.yOffset
+
     mirrorX = bitAnd(bits, Screen.BIT_MIRROR_X) > 0
     mirrorY = bitAnd(bits, Screen.BIT_MIRROR_Y) > 0
 
@@ -55,7 +77,10 @@ Screen.render = function(xp, yp, tile, colors, bits)
             col = bitAnd(floor(colors / (2 ^ (self.sheet.pixels[xs + ys * self.sheet.width + toffs] * 8))), 255)
             // col = (colors >> (sheet.pixels[xs + ys * sheet.width + toffs] * 8)) & 255;
 
-            if col < 255 then self.pixels[(x + xp) + (y + yp) * self.w] = col
+            if col < 255 then
+                // self.pixels[(x + xp) + (y + yp) * self.w] = col
+                self.backBuffer.setPixel(x + xp, self.h - (y + yp) - 1, Game.COLORS[col])
+            end if
         end for
     end for
 end function
@@ -65,17 +90,32 @@ end function
 Screen.setOffset = function(xOffset, yOffset)
     self.xOffset = xOffset
     self.yOffset = yOffset
+
+    // self.display.scrollX = self.xOffset
+    // self.display.scrollY = self.yOffset
+
+    // self.backBuffer.scrollX = self.xOffset
+    // self.backBuffer.scrollY = self.yOffset
 end function
 
 // @param {Screen} screen2
 // @param {int} xa
 // @param {int} ya
 Screen.overlay = function(screen2, xa, ya)
-    oPixels = screen2.pixels
+    // oPixels = screen2.pixels
     i = 0
     for y in range(0, self.h - 1)
         for x in range(0, self.w - 1)
-            if floor(oPixels[i] / 10) <= self.dither[bitAnd((x + xa), 3) + bitAnd((y + ya), 3) * 4] then self.pixels[i] = 0
+            // if floor(oPixels[i] / 10) <= self.dither[bitAnd((x + xa), 3) + bitAnd((y + ya), 3) * 4] then
+            //     self.pixels[i] = 0
+            // end if
+
+            clr = color.toList(screen2.display.pixel(x, screen2.h - y - 1))
+            clr = (clr[0] + clr[1] + clr[2]) / 3
+            if floor(clr / 10) <= self.dither[bitAnd((x + xa), 3) + bitAnd((y + ya), 3) * 4] then
+                self.backBuffer.setPixel(x, self.h - y - 1, Game.COLORS[0])
+            end if
+
             i += 1
         end for
     end for
@@ -87,6 +127,7 @@ end function
 Screen.renderLight = function(x, y, r)
     x -= self.xOffset
     y -= self.yOffset
+
     x0 = x - r
     x1 = x + r
     y0 = y - r
@@ -105,7 +146,16 @@ Screen.renderLight = function(x, y, r)
             dist = xd * xd + yd
             if dist <= r * r then
                 br = 255 - dist * 255 / (r * r)
-                if self.pixels[xx + yy * w] < br then self.pixels[xx + yy * w] = br
+
+                // if self.pixels[xx + yy * w] < br then
+                //     self.pixels[xx + yy * w] = br
+                // end if
+
+                clr = color.toList(self.backBuffer.pixel(xx, self.h - yy - 1))
+                clr = floor((clr[0] + clr[1] + clr[2]) / 3)
+                if clr < br then
+                    self.backBuffer.setPixel(xx, self.h - yy - 1, Game.COLORS[br])
+                end if
             end if
         end for
     end for

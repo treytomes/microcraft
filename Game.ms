@@ -2,7 +2,8 @@ Game = {}
 Game.NAME = "Minicraft"
 Game.HEIGHT = 120
 Game.WIDTH = 160
-Game.SCALE = 3
+// Game.SCALE = 3
+Game.SCALE = 5.3
 Game.IMAGE = file.loadImage("assets/icons.png")
 
 Game.make = function
@@ -12,7 +13,6 @@ Game.make = function
     self.lightScreen = null
     self.input = (new InputHandler).make
 
-    self.colors = self.getColors
     self.tickCount = 0
     self.gameTime = 0
 
@@ -70,6 +70,7 @@ Game.getColors = function
 
     return colors
 end function
+Game.COLORS = Game.getColors
 
 Game.resetGame = function
     self.playerDeadTime = 0
@@ -111,11 +112,13 @@ Game.resetGame = function
     end if
 
     text.clear
-    gfx.clear
+    // gfx.clear
 end function
 
 Game.init = function
     self.screen = (new Screen).make(Game.WIDTH, Game.HEIGHT, (new SpriteSheet).make(Game.IMAGE))
+    self.screen.install
+    
     self.lightScreen = (new Screen).make(Game.WIDTH, Game.HEIGHT, (new SpriteSheet).make(Game.IMAGE))
 
     // This is causing the levels array to be generated on load *and* on start game.
@@ -248,32 +251,27 @@ Game.render = function
     // TODO: I don't think the Mini Micro knows if it has focus.
     // if (!hasFocus()) renderFocusNagger()
 
-    for y in range(0, self.screen.h - 1)
-        for x in range(0, self.screen.w - 1)
-            cc = self.screen.pixels[x + y * self.screen.w]
+    // for y in range(0, self.screen.h - 1)
+    //     for x in range(0, self.screen.w - 1)
+    //         cc = self.screen.pixels[x + y * self.screen.w]
 
-            // Immediately draw to the PixelDisplay.
-            // TODO: I'm ignoring the *3 scale for the moment.
-            if cc < 255 then
-                gfx.setPixel x, self.screen.h - y - 1, self.colors[cc]
-            else
-                // TODO: This bit might not be needed.
-                // gfx.setPixel x, self.screen.h - y - 1, color.red
-                // gfx.setPixel x, self.screen.h - y - 1, color.black
-            end if
-        end for
-    end for
+    //         // Immediately draw to the PixelDisplay.
+    //         // TODO: I'm ignoring the *3 scale for the moment.
+    //         if cc < 255 then
+    //             gfx.setPixel x, self.screen.h - y - 1, Game.COLORS[cc]
+    //         else
+    //             // TODO: This bit might not be needed.
+    //             // gfx.setPixel x, self.screen.h - y - 1, color.red
+    //             // gfx.setPixel x, self.screen.h - y - 1, color.black
+    //         end if
+    //     end for
+    // end for
 
-    // Graphics g = bs.getDrawGraphics()
-    // g.fillRect(0, 0, getWidth(), getHeight())
+    self.screen.flip
 
-    // ww = WIDTH * 3
-    // hh = HEIGHT * 3
-    // xo = (getWidth() - ww) / 2
-    // yo = (getHeight() - hh) / 2
-    // g.drawImage(image, xo, yo, ww, hh, null)
-    // g.dispose()
-    // bs.show()
+    // img = self.screen.display.getImage
+    // img.flip true
+    // gfx.drawImage img
 end function
 
 Game.renderGui = function
