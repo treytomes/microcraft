@@ -12,12 +12,11 @@ end function
 Inventory.add = function(slot, item = null)
     if item != null then
         if item isa ResourceItem then
-            toTake = item
-            has = self.findResource(toTake.resource)
+            has = self.findResource(item.resource)
             if has == null then
-                self.items.insert(slot, toTake)
+                self.items.insert(slot, item)
             else
-                has.count += toTake.count
+                has.count += item.count
             end if
         else
             self.items.add(slot, item)
