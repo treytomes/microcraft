@@ -296,7 +296,7 @@ Game.renderGui = function
         end if
 
         if self.player.staminaRechargeDelay > 0 then
-            if floor(plaself.playeryer.staminaRechargeDelay / 4) % 2 == 0 then
+            if floor(plaself.player.staminaRechargeDelay / 4) % 2 == 0 then
                 self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 555, 000, 000), 0)
             else
                 self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 110, 000, 000), 0)
