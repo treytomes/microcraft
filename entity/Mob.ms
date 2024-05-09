@@ -122,10 +122,10 @@ Mob.doHurt = function(damage, attackDir)
     end if
     self.level.add((new TextParticle).make("" + damage, self.x, self.y, Color.get(-1, 500, 500, 500)))
     self.health -= damage
-    if self.attackDir == 0 then self.yKnockback =  6
-    if self.attackDir == 1 then self.yKnockback = -6
-    if self.attackDir == 2 then self.xKnockback = -6
-    if self.attackDir == 3 then self.xKnockback =  6
+    if attackDir == 0 then self.yKnockback =  6
+    if attackDir == 1 then self.yKnockback = -6
+    if attackDir == 2 then self.xKnockback = -6
+    if attackDir == 3 then self.xKnockback =  6
     self.hurtTime = 10
 end function
 
