@@ -42,7 +42,7 @@ end function
 Mob.move = function(xa, ya)
     if self.isSwimming then
         self.swimTimer += 1
-        if swimTimer % 2 == 0 then return true
+        if self.swimTimer % 2 == 0 then return true
     end if
     if self.xKnockback < 0 then
         self.move2(-1, 0)
