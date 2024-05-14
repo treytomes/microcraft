@@ -364,7 +364,7 @@ LevelGen.createUndergroundMap = function(w, h, depth)
             rockCount = 0
             for yy in range(y - 1, y + 1)
                 for xx in range(x - 1, x + 1)
-                    if map[xx + yy * w] != Tile.rock.id then
+                    if map[xx + yy * w] == Tile.rock.id then
                         rockCount += 1
                     end if
                 end for
@@ -406,8 +406,7 @@ LevelGen.createSkyMap = function(w, h)
             else
                 dist = yd
             end if
-            dist = dist * dist * dist * dist
-            dist = dist * dist * dist * dist
+            dist = dist ^ 8
             val = -val * 1 - 2.2
             val = val + 1 - dist * 20
 
