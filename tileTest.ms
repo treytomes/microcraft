@@ -1,6 +1,7 @@
 import "importUtil"
 ensureImport "events"
 ensureImport "listUtil"
+ensureImport "stringUtil"
 ensureImport "qa"
 
 ensureImport "coreUtil"

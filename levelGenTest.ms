@@ -1,6 +1,7 @@
 import "importUtil"
 ensureImport "events"
 ensureImport "listUtil"
+ensureImport "stringUtil"
 ensureImport "qa"
 
 ensureImport "coreUtil"
@@ -188,6 +189,9 @@ tick = function
         globals.level += 1
         renderLevel level
     end if
+    if input.attack.clicked or input.menu.clicked then
+        renderLevel level
+    end if
     // if input.attack.clicked then print "attack"
     // if input.menu.clicked then print "menu"
 end function
@@ -236,36 +240,63 @@ renderLevel = function(level)
     text.clear
     gfx.clear
 
+    startTime = time
     if level == -1 then
-        map = LevelGen.createAndValidateSkyMap(w, h)[0]
+        globals.map = LevelGen.createAndValidateSkyMap(w, h)[0]
     else if level == 0 then
-        map = LevelGen.createAndValidateTopMap(w, h)[0]
+        globals.map = LevelGen.createAndValidateTopMap(w, h)[0]
     else
-        map = LevelGen.createAndValidateUndergroundMap(w, h, level)[0]
+        globals.map = LevelGen.createAndValidateUndergroundMap(w, h, level)[0]
     end if
+    endTime = time
+
     // map = LevelGen.createAndValidateUndergroundMap(w, h, (d++ % 3) + 1)[0]
     // map = LevelGen.createAndValidateSkyMap(w, h)[0]
     for y in range(0, h - 1)
         for x in range(0, w - 1)
             i = x + y * w
 
-            if map[i] == Tile.water.id then setCell(x, y, "#000080")
-            if map[i] == Tile.grass.id then setCell(x, y, "#208020")
-            if map[i] == Tile.rock.id then setCell(x, y, "#a0a0a0")
-            if map[i] == Tile.dirt.id then setCell(x, y, "#604040")
-            if map[i] == Tile.sand.id then setCell(x, y, "#a0a040")
-            if map[i] == Tile.tree.id then setCell(x, y, "#003000")
-            if map[i] == Tile.lava.id then setCell(x, y, "#ff2020")
-            if map[i] == Tile.cloud.id then setCell(x, y, "#a0a0a0")
-            if map[i] == Tile.stairsDown.id then setCell(x, y, "#ffffff")
-            if map[i] == Tile.stairsUp.id then setCell(x, y, "#ffffff")
-            if map[i] == Tile.cloudCactus.id then setCell(x, y, "#ff00ff")
+            if map[i] == Tile.water.id then
+                setCell(x, y, "#000080")
+            else if map[i] == Tile.grass.id then
+                setCell(x, y, "#208020")
+            else if map[i] == Tile.rock.id then
+                setCell(x, y, "#a0a0a0")
+            else if map[i] == Tile.dirt.id then
+                setCell(x, y, "#604040")
+            else if map[i] == Tile.sand.id then
+                setCell(x, y, "#a0a040")
+            else if map[i] == Tile.tree.id then
+                setCell(x, y, "#003000")
+            else if map[i] == Tile.lava.id then
+                setCell(x, y, "#ff2020")
+            else if map[i] == Tile.cloud.id then
+                setCell(x, y, "#a0a0a0")
+            else if map[i] == Tile.stairsDown.id then
+                setCell(x, y, "#ffffff")
+            else if map[i] == Tile.stairsUp.id then
+                setCell(x, y, "#ffffff")
+            else if map[i] == Tile.cloudCactus.id then
+                setCell(x, y, "#ff00ff")
+            else if map[i] == Tile.flower.id then
+                setCell(x, y, "#ee22ee")
+            else if map[i] == Tile.cactus.id then
+                setCell(x, y, "#00ee00")
+            else if map[i] == Tile.infiniteFall.id then
+                setCell(x, y, "#000000")
+            else if [ Tile.ironOre.id, Tile.goldOre.id, Tile.gemOre.id ].contains(map[i]) then
+                setCell(x, y, "#ffff00")
+            else
+                print "unknown tile id: " + map[i]
+                setCell(x, y, "#ff0000")
+            end if
         end for
     end for
 
     text.row = 25
     text.column = 0
-    print "level=" + level
+    print "Level = " + level
+    print "Generation time (s) = " + (endTime - startTime)
 end function
 
 // print "micro-hack!"
