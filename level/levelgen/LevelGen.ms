@@ -185,7 +185,7 @@ end function
 LevelGen.createTopMap = function(w, h)
     // startTime = time
 
-    mnoise1 = (new LevelGen).make(w, h, 16)
+    mNoise1 = (new LevelGen).make(w, h, 16)
     noise1 = (new LevelGen).make(w, h, 32)
 
     map = [0] * w * h
@@ -195,7 +195,7 @@ LevelGen.createTopMap = function(w, h)
             i = x + y * w
             
             val = abs(noise1.values[i]) * 3 - 2
-            mval = abs(mnoise1.values[i]) * 3 - 2
+            mVal = abs(mNoise1.values[i]) * 3 - 2
 
             xd = x / (w - 1.0) * 2 - 1
             yd = y / (h - 1.0) * 2 - 1
@@ -212,11 +212,11 @@ LevelGen.createTopMap = function(w, h)
 
             if val < -0.5 then
                 map[i] = Tile.water.id
-            else if (val >= -0.5 and val <= -0.2) or mval > 0.55 then
+            else if (val >= -0.5 and val <= -0.2) or mVal > 0.55 then
                 map[i] = Tile.sand.id
-            else if val > 0.5 and mval < -1.5 then
+            else if val > 0.5 and mVal < -1.5 then
                 map[i] = Tile.rock.id
-            else if mval < -1 and val > 0 and val < 0.5 then
+            else if mVal < -1 and val > 0 and val < 0.5 then
                 map[i] = Tile.tree.id
             else
                 map[i] = Tile.grass.id
@@ -279,20 +279,9 @@ end function
 // @param {int} depth
 // @returns {byte[][]}
 LevelGen.createUndergroundMap = function(w, h, depth)
-    mnoise1 = (new LevelGen).make(w, h, 16)
-    // mnoise2 = (new LevelGen).make(w, h, 16)
-    // mnoise3 = (new LevelGen).make(w, h, 16)
-
-    // nnoise1 = (new LevelGen).make(w, h, 16)
-    // nnoise2 = (new LevelGen).make(w, h, 16)
-    // nnoise3 = (new LevelGen).make(w, h, 16)
-
-    // wnoise1 = (new LevelGen).make(w, h, 16)
-    // wnoise2 = (new LevelGen).make(w, h, 16)
-    // wnoise3 = (new LevelGen).make(w, h, 16)
+    mNoise1 = (new LevelGen).make(w, h, 16)
 
     noise1 = (new LevelGen).make(w, h, 32)
-    // noise2 = (new LevelGen).make(w, h, 32)
 
     map = [0] * w * h
     data = [0] * w * h
@@ -300,21 +289,10 @@ LevelGen.createUndergroundMap = function(w, h, depth)
         for x in range(0, w - 1)
             i = x + y * w
 
-            // val = abs(noise1.values[i] - noise2.values[i]) * 3 - 2
             val = abs(noise1.values[i]) * 3 - 2
-
-            // mval = abs(mnoise1.values[i] - mnoise2.values[i])
-            // mval = abs(mval - mnoise3.values[i]) * 3 - 2
-            mval = abs(mnoise1.values[i]) * 3 - 2
-
-            // nval = abs(nnoise1.values[i] - nnoise2.values[i])
-            // nval = abs(nval - nnoise3.values[i]) * 3 - 2
-            // nval = abs(nnoise1.values[i]) * 3 - 2
-            nval = mval
-
-            wval = abs(nval - mnoise1.values[i]) * 3 - 2
-            // wval = abs(nval - wnoise3.values[i]) * 3 - 2
-            // wval = abs(wnoise1.values[i]) * 3 - 2
+            mVal = abs(mNoise1.values[i]) * 3 - 2
+            nVal = mVal
+            wVal = abs(nVal - mNoise1.values[i]) * 3 - 2
 
             xd = abs(x / (w - 1.0) * 2 - 1)
             yd = abs(y / (h - 1.0) * 2 - 1)
@@ -326,13 +304,13 @@ LevelGen.createUndergroundMap = function(w, h, depth)
             dist = dist ^ 8
             val = val + 1 - dist * 20
 
-            if val > -2 and wval < -2.0 + depth / 2 * 3 then
+            if val > -2 and wVal < -2.0 + depth / 2 * 3 then
                 if depth > 2 then
                     map[i] = Tile.lava.id
                 else
                     map[i] = Tile.water.id
                 end if
-            else if val > -2 and (mval < -1.7 or nval < -1.4) then
+            else if val > -2 and (mVal < -1.7 or nVal < -1.4) then
                 map[i] = Tile.dirt.id
             else
                 map[i] = Tile.rock.id

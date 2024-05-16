@@ -14,7 +14,7 @@ InstructionsMenu.tick = function
     end if
 end function
 
-// @param {Screen} scren
+// @param {Screen} screen
 InstructionsMenu.render = function(screen)
     screen.clear(0)
 

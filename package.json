@@ -1,0 +1,15 @@
+{
+  "name": "microcraft",
+  "version": "1.0.0",
+  "description": "MiniCraft rewrite in MiniScript for the Mini Micro.",
+  "main": "main.ms",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "cspell"
+  },
+  "author": "Trey Tomes",
+  "license": "MIT",
+  "devDependencies": {
+    "cspell": "^8.8.1"
+  }
+}

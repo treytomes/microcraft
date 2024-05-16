@@ -90,7 +90,7 @@ globals.WaterTile = require("WaterTile")
 globals.WheatTile = require("WheatTile")
 
 // item/source
-// TODO: I'm expecting a circular dependency here.  Might need a factory initializer for recipes and resouces.
+// TODO: I'm expecting a circular dependency here.  Might need a factory initializer for recipes and resources.
 globals.Resource = require("Resource")
 globals.FoodResource = require("FoodResource")
 globals.PlantableResource = require("PlantableResource")

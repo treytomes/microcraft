@@ -51,13 +51,13 @@ ItemEntity.tick = function()
     oy = self.y
     nx = floor(self.xx)
     ny = floor(self.yy)
-    expectedx = nx - self.x
-    expectedy = ny - self.y
+    expectedX = nx - self.x
+    expectedY = ny - self.y
     self.move(nx - self.x, ny - self.y)
-    gotx = self.x - ox
-    goty = self.y - oy
-    self.xx += gotx - expectedx
-    self.yy += goty - expectedy
+    gotX = self.x - ox
+    gotY = self.y - oy
+    self.xx += gotX - expectedX
+    self.yy += gotY - expectedY
 
     if self.hurtTime > 0 then self.hurtTime -= 1
 end function

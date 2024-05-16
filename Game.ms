@@ -131,48 +131,6 @@ Game.init = function
     self.setMenu((new TitleMenu).make)
 end function
 
-// Game.run = function
-//     long lastTime = System.nanoTime();
-//     double unprocessed = 0;
-//     double nsPerTick = 1000000000.0 / 60;
-//     int frames = 0;
-//     int ticks = 0;
-//     long lastTimer1 = System.currentTimeMillis();
-
-//     init();
-
-//     while (running) {
-//         long now = System.nanoTime();
-//         unprocessed += (now - lastTime) / nsPerTick;
-//         lastTime = now;
-//         boolean shouldRender = true;
-//         while (unprocessed >= 1) {
-//             ticks++;
-//             tick();
-//             unprocessed -= 1;
-//             shouldRender = true;
-//         }
-
-//         try {
-//             Thread.sleep(2);
-//         } catch (InterruptedException e) {
-//             e.printStackTrace();
-//         }
-
-//         if (shouldRender) {
-//             frames++;
-//             render();
-//         }
-
-//         if (System.currentTimeMillis() - lastTimer1 > 1000) {
-//             lastTimer1 += 1000;
-//             System.out.println(ticks + " ticks, " + frames + " fps");
-//             frames = 0;
-//             ticks = 0;
-//         }
-//     }
-// end function
-
 Game.tick = function
     self.tickCount += 1
 
@@ -219,13 +177,6 @@ Game.changeLevel = function(dir)
 end function
 
 Game.render = function
-    // BufferStrategy bs = getBufferStrategy();
-    // if (bs == null) {
-    //     createBufferStrategy(3);
-    //     requestFocus();
-    //     return;
-    // }
-
     xScroll = self.player.x - floor(self.screen.w / 2)
     yScroll = self.player.y - floor((self.screen.h - 8) / 2)
     if xScroll < 16 then xScroll = 16
@@ -296,7 +247,7 @@ Game.renderGui = function
         end if
 
         if self.player.staminaRechargeDelay > 0 then
-            if floor(plaself.player.staminaRechargeDelay / 4) % 2 == 0 then
+            if floor(self.player.staminaRechargeDelay / 4) % 2 == 0 then
                 self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 555, 000, 000), 0)
             else
                 self.guiScreen.render(i * 8, self.guiScreen.h - 8, 1 + 12 * 32, Color.get(000, 110, 000, 000), 0)

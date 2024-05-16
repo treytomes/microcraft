@@ -5,7 +5,7 @@ FoodResource = new Resource
 // @param {int} color
 // @param {int} heal
 // @param {int} staminaCost
-// @return {FoodResouce}
+// @return {FoodResource}
 FoodResource.make = function(name, sprite, color, heal, staminaCost)
     super.make(name, sprite, color)
     self.heal = heal

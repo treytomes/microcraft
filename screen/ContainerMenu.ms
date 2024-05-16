@@ -35,7 +35,7 @@ ContainerMenu.tick = function()
     i2 = iif(self.window == 0, self.player.inventory, self.container)
 
     len = i.items.len
-    if selfselected < 0 then self.selected = 0
+    if self.selected < 0 then self.selected = 0
     if self.selected >= len then self.selected = len - 1
 
     if self.input.up.clicked then self.selected -= 1
